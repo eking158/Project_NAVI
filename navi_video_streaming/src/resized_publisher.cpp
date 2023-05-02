@@ -29,7 +29,7 @@ void ResizedPublisher::publish(const sensor_msgs::Image& message,
   cv::resize(cv_image, buffer, cv::Size(new_width, new_height));
 
   // Set up ResizedImage and publish
-  image_transport_tutorial::ResizedImage resized_image;
+  navi_video_streaming::ResizedImage resized_image;
   resized_image.original_height = cv_image.rows;
   resized_image.original_width = cv_image.cols;
   resized_image.image = *(cv_bridge::CvImage(message.header, "bgr8", cv_image).toImageMsg());

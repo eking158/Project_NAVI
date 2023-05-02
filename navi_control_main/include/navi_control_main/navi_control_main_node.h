@@ -7,7 +7,7 @@
 #include <geometry_msgs/Twist.h>
 #include <navi_humanoid_msgs/Humanoid.h>
 #include <navi_humanoid_msgs/Hands.h>
-#include <dynamixel_sdk_examples/SyncSetPosition.h>
+#include <navi_control_dynamixel/SyncSetPosition.h>
 
 //custom header
 
@@ -21,9 +21,9 @@ ros::Subscriber data_sub;
 
 
 //ros msg
-dynamixel_sdk_examples::SyncSetPosition dynamixel_up_msg;    //up dynamixel control msg
-dynamixel_sdk_examples::SyncSetPosition dynamixel_middle_msg;  //middle dynamixel control msg
-dynamixel_sdk_examples::SyncSetPosition dynamixel_down_msg;  //down dynamixel control msg
+navi_control_dynamixel::SyncSetPosition dynamixel_up_msg;    //up dynamixel control msg
+navi_control_dynamixel::SyncSetPosition dynamixel_middle_msg;  //middle dynamixel control msg
+navi_control_dynamixel::SyncSetPosition dynamixel_down_msg;  //down dynamixel control msg
 geometry_msgs::Twist velocity_msg;                           //mobile robot velocity control msg
 navi_humanoid_msgs::Hands hands_msg;                         //hands fingers control msg
 

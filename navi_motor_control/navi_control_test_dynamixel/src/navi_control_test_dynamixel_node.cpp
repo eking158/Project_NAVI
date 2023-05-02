@@ -65,7 +65,7 @@ int main(int argc, char** argv)
   ros::NodeHandle nh;
   initialize();
 
-  angle_pub = nh.advertise<dynamixel_sdk_examples::SyncSetPosition>("/dynamicxel_set_position",1);
+  angle_pub = nh.advertise<navi_control_dynamixel::SyncSetPosition>("/dynamicxel_set_position",1);
   velocity_pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel",1);
   data_sub = nh.subscribe("/navi/unity",1000,GetDataCallback);
 

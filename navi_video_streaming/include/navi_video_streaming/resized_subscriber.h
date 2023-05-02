@@ -1,7 +1,7 @@
 #include <image_transport/simple_subscriber_plugin.h>
-#include <image_transport_tutorial/ResizedImage.h>
+#include <navi_video_streaming/ResizedImage.h>
 
-class ResizedSubscriber : public image_transport::SimpleSubscriberPlugin<image_transport_tutorial::ResizedImage>
+class ResizedSubscriber : public image_transport::SimpleSubscriberPlugin<navi_video_streaming::ResizedImage>
 {
 public:
   virtual ~ResizedSubscriber() {}
@@ -12,6 +12,6 @@ public:
   }
 
 protected:
-  virtual void internalCallback(const typename image_transport_tutorial::ResizedImage::ConstPtr& message,
+  virtual void internalCallback(const typename navi_video_streaming::ResizedImage::ConstPtr& message,
                                 const Callback& user_cb);
 };

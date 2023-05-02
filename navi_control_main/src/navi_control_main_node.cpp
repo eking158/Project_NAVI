@@ -154,9 +154,9 @@ int main(int argc, char** argv)
   ros::NodeHandle nh;
   initialize();
 
-  dynamixel_up_pub = nh.advertise<dynamixel_sdk_examples::SyncSetPosition>("/navi/dynamicxel_set_position_up",1);
-  dynamixel_middle_pub = nh.advertise<dynamixel_sdk_examples::SyncSetPosition>("/navi/dynamicxel_set_position_middle",1);
-  dynamixel_down_pub = nh.advertise<dynamixel_sdk_examples::SyncSetPosition>("/navi/dynamicxel_set_position_down",1);
+  dynamixel_up_pub = nh.advertise<navi_control_dynamixel::SyncSetPosition>("/navi/dynamicxel_set_position_up",1);
+  dynamixel_middle_pub = nh.advertise<navi_control_dynamixel::SyncSetPosition>("/navi/dynamicxel_set_position_middle",1);
+  dynamixel_down_pub = nh.advertise<navi_control_dynamixel::SyncSetPosition>("/navi/dynamicxel_set_position_down",1);
   cmd_vel_pub = nh.advertise<geometry_msgs::Twist>("/navi/cmd_vel",1);
   hand_pub = nh.advertise<navi_humanoid_msgs::Hands>("/navi/hand",1);
   

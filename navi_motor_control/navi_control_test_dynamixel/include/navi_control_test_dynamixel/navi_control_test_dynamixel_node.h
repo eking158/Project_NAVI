@@ -6,7 +6,7 @@
 //ros_communication_message type
 #include <geometry_msgs/Twist.h>
 #include <navi_proto_humanoid_msgs/Humanoid.h>
-#include <dynamixel_sdk_examples/SyncSetPosition.h>
+#include <navi_control_dynamixel/SyncSetPosition.h>
 
 //custom header
 
@@ -17,7 +17,7 @@ ros::Subscriber data_sub;
 
 
 //ros msg
-dynamixel_sdk_examples::SyncSetPosition angle_msg;
+navi_control_dynamixel::SyncSetPosition angle_msg;
 geometry_msgs::Twist velocity_msg;
 
 //variables

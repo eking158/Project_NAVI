@@ -2,7 +2,7 @@
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/imgproc/imgproc.hpp>
 
-void ResizedSubscriber::internalCallback(const image_transport_tutorial::ResizedImage::ConstPtr& msg,
+void ResizedSubscriber::internalCallback(const navi_video_streaming::ResizedImage::ConstPtr& msg,
                                          const Callback& user_cb)
 {
   // This is only for optimization, not to copy the image

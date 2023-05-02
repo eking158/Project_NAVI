@@ -48,8 +48,8 @@ Right_elbow_yaw -> Right_wrist_pitch -> Right_wrist_roll
 #include <ros/ros.h>
 
 #include "std_msgs/String.h"
-#include "dynamixel_sdk_examples/SyncGetPosition.h"
-#include "dynamixel_sdk_examples/SyncSetPosition.h"
+#include "navi_control_dynamixel/SyncGetPosition.h"
+#include "navi_control_dynamixel/SyncSetPosition.h"
 #include "dynamixel_sdk/dynamixel_sdk.h"
 
 using namespace dynamixel;
@@ -154,7 +154,7 @@ bool syncGetPresentPositionCallback(
 }
 */
 
-void syncSetPositionCallback(const dynamixel_sdk_examples::SyncSetPosition::ConstPtr & msg)
+void syncSetPositionCallback(const navi_control_dynamixel::SyncSetPosition::ConstPtr & msg)
 {
   uint8_t dxl_error = 0;
   int dxl_comm_result = COMM_TX_FAIL;
