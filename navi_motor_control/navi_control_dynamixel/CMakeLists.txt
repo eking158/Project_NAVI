@@ -2,7 +2,7 @@
 # Set minimum required version of cmake, project name and compile options
 ################################################################################
 cmake_minimum_required(VERSION 2.8.3)
-project(dynamixel_sdk_examples)
+project(navi_control_dynamixel)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -63,22 +63,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(read_write_node src/read_write_node.cpp)
-add_dependencies(read_write_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(read_write_node ${catkin_LIBRARIES})
-
-add_executable(dynamicxel_test src/dynamicxel_test.cpp)
-add_dependencies(dynamicxel_test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(dynamicxel_test ${catkin_LIBRARIES})
-
-add_executable(bulk_read_write_node src/bulk_read_write_node.cpp)
-add_dependencies(bulk_read_write_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(bulk_read_write_node ${catkin_LIBRARIES})
-
-add_executable(indirect_address_node src/indirect_address_node.cpp)
-add_dependencies(indirect_address_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(indirect_address_node ${catkin_LIBRARIES})
-
 add_executable(navi_dynamixel_up_node src/navi_dynamixel_up_node.cpp)
 add_dependencies(navi_dynamixel_up_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(navi_dynamixel_up_node ${catkin_LIBRARIES})
@@ -96,6 +80,6 @@ target_link_libraries(navi_dynamixel_down_node ${catkin_LIBRARIES})
 ################################################################################
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
-install(TARGETS dynamicxel_test read_write_node bulk_read_write_node indirect_address_node
+install(TARGETS
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

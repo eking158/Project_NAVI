@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>dynamixel_sdk_examples</name>
+  <name>navi_control_dynamixel</name>
   <version>3.7.51</version>
   <description>The DYNAMIXEL SDK ROS example package</description>
 
