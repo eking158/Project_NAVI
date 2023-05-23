@@ -32,9 +32,13 @@ void initialize(){
   file_path_2 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/test.png";
   gif_file_path_1 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/gif_test_1/";
   gif_file_path_2 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/gif_test_2/";
+  //test file path
+  normal_face_path = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/normal_face.png";
+  face_path_1 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/face_1/";
+  face_path_2 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/face_2/";
 
   //CheckImage(gif_file_path_2);
-
+  normal_face = cv::imread(normal_face_path, cv::IMREAD_COLOR);
   image_1 = cv::imread(file_path_1, cv::IMREAD_COLOR);
   image_2 = cv::imread(file_path_2, cv::IMREAD_COLOR);
 }
@@ -42,22 +46,35 @@ void initialize(){
 void GetDataCallback(const std_msgs::Int16& msg){
     display_head = msg.data;
     time_stack++;
-    switch(msg.data){
+    switch(display_head){
       case 0:
-      cv::imshow("view", image_1);
+      cv::imshow("view", normal_face);
       cv::waitKey(10);
       break;
 
       case 1:
+      GIFShow(face_path_1, &time_stack, 16, 0.1);
+      break;
+
+      case 2:
+      GIFShow(face_path_2, &time_stack, 17, 0.15);
+      break;
+
+      case 10:
+      cv::imshow("view", image_1);
+      cv::waitKey(10);
+      break;
+
+      case 11:
       cv::imshow("view", image_2);
       cv::waitKey(10);
       break;
 
-      case 2:
+      case 12:
       GIFShow(gif_file_path_1, &time_stack, 12, 0.4);
       break;
 
-      case 3:
+      case 13:
       GIFShow(gif_file_path_2, &time_stack, 13, 0.2);
       break;
     }

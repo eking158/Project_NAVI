@@ -32,7 +32,11 @@ string file_path_1;
 string file_path_2;
 string gif_file_path_1;
 string gif_file_path_2;
+string normal_face_path;
+string face_path_1;
+string face_path_2;
 
+cv::Mat normal_face;
 cv::Mat image_1;
 cv::Mat image_2;
 
@@ -40,6 +44,7 @@ cv::Mat image_2;
 //function
 void initialize();
 void CheckImage(const char* path);
+void GIFShow(string path, int* now_time, int frame_num, float frame_time);
 
 //callback
 void GetDataCallback(const std_msgs::Int16& msg);
