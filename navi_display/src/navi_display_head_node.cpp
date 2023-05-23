@@ -15,7 +15,9 @@ void GIFShow(string path, int* now_time, int frame_num, float frame_time){
         ROS_INFO("%d", *now_time);
         num_gif_char=to_string(num_gif);
         cv::Mat gif = cv::imread(path+num_gif_char+".png", cv::IMREAD_COLOR);
-        cv::imshow("view", gif);
+        cv::Mat gif_rotate;
+        cv::rotate(gif, gif_rotate, cv::ROTATE_90_CLOCKWISE);
+        cv::imshow("view", gif_rotate);
         cv::waitKey(10);
         if(num_gif==frame_num) num_gif=1;
         else num_gif++;
@@ -28,14 +30,14 @@ void initialize(){
   time_stack = 0;
   num_gif = 1;
 
-  file_path_1 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/background2.jpg";
-  file_path_2 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/test.png";
-  gif_file_path_1 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/gif_test_1/";
-  gif_file_path_2 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/gif_test_2/";
+  file_path_1 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/background2.jpg";
+  file_path_2 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/test.png";
+  gif_file_path_1 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/gif_test_1/";
+  gif_file_path_2 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/gif_test_2/";
   //test file path
-  normal_face_path = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/normal_face.png";
-  face_path_1 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/face_1/";
-  face_path_2 = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/images/face_2/";
+  normal_face_path = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/normal_face.png";
+  face_path_1 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/face_1/";
+  face_path_2 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/face_2/";
 
   //CheckImage(gif_file_path_2);
   normal_face = cv::imread(normal_face_path, cv::IMREAD_COLOR);
