@@ -597,29 +597,29 @@ int main(int argc, char ** argv)
 
   dxl_comm_result = groupSyncWrite_velocity.txPacket();
   if (dxl_comm_result == COMM_SUCCESS) {
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL1_ID, profile_velocity1);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL2_ID, profile_velocity2);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL3_ID, profile_velocity3);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL4_ID, profile_velocity4);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL5_ID, profile_velocity5);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL6_ID, profile_velocity6);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL7_ID, profile_velocity7);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL8_ID, profile_velocity8);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL9_ID, profile_velocity9);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL1_ID, profile_velocity1);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL2_ID, profile_velocity2);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL3_ID, profile_velocity3);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL4_ID, profile_velocity4);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL5_ID, profile_velocity5);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL6_ID, profile_velocity6);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL7_ID, profile_velocity7);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL8_ID, profile_velocity8);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL9_ID, profile_velocity9);
   } else {
     ROS_ERROR("Failed to set profile velocity! Result: %d", dxl_comm_result);
   }
   dxl_comm_result = groupSyncWrite_accel.txPacket();
   if (dxl_comm_result == COMM_SUCCESS) {
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL1_ID, profile_accel1);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL2_ID, profile_accel2);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL3_ID, profile_accel3);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL4_ID, profile_accel4);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL5_ID, profile_accel5);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL6_ID, profile_accel6);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL7_ID, profile_accel7);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL8_ID, profile_accel8);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL9_ID, profile_accel9);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL1_ID, profile_accel1);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL2_ID, profile_accel2);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL3_ID, profile_accel3);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL4_ID, profile_accel4);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL5_ID, profile_accel5);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL6_ID, profile_accel6);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL7_ID, profile_accel7);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL8_ID, profile_accel8);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL9_ID, profile_accel9);
   } else {
     ROS_ERROR("Failed to set profile accel! Result: %d", dxl_comm_result);
   }
