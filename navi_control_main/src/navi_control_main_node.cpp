@@ -102,6 +102,9 @@ void initialize(){
     hands_msg.right_middle = 0;
     hands_msg.right_ring = 180;
     hands_msg.right_pinky = 135;
+
+  //display setting
+    display_msg.data = 0;
 }
 
 
@@ -145,6 +148,9 @@ void GetDataCallback(const navi_humanoid_msgs::Humanoid& msg){
     hands_msg.right_middle = msg.right_hands[2];
     hands_msg.right_ring = msg.right_hands[3];
     hands_msg.right_pinky = msg.right_hands[4];
+
+  //display setting
+    display_msg.data = msg.etc[0];
 }
 
 int main(int argc, char** argv)
@@ -159,6 +165,7 @@ int main(int argc, char** argv)
   dynamixel_down_pub = nh.advertise<navi_control_dynamixel::SyncSetPosition>("/navi/dynamicxel_set_position_down",1);
   cmd_vel_pub = nh.advertise<geometry_msgs::Twist>("/navi/cmd_vel",1);
   hand_pub = nh.advertise<navi_humanoid_msgs::Hands>("/navi/hand",1);
+  display_pub = nh.advertise<std_msgs::Int16>("/navi/display",1);
   
   data_sub = nh.subscribe("/navi/unity",1000,GetDataCallback);
 
@@ -172,6 +179,7 @@ int main(int argc, char** argv)
     dynamixel_down_pub.publish(dynamixel_down_msg);   //control down dynamixel motors
     cmd_vel_pub.publish(velocity_msg);                //control dc motors with arduino
     hand_pub.publish(hands_msg);                   //control micro_servos with arduino
+    display_pub.publish(display_msg);                   //control display for showing face
   
     loopRate.sleep();
     }

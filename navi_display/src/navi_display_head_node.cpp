@@ -12,12 +12,12 @@ void CheckImage(const char* path){
 
 void GIFShow(string path, int* now_time, int frame_num, float frame_time){
   if(*now_time > frame_time*PUB_HZ){
-        ROS_INFO("%d", *now_time);
+        //ROS_INFO("%d", *now_time);
         num_gif_char=to_string(num_gif);
         cv::Mat gif = cv::imread(path+num_gif_char+".png", cv::IMREAD_COLOR);
         cv::Mat gif_rotate;
         cv::rotate(gif, gif_rotate, cv::ROTATE_90_CLOCKWISE);
-        cv::imshow("view", gif_rotate);
+        cv::imshow("face", gif_rotate);
         cv::waitKey(10);
         if(num_gif==frame_num) num_gif=1;
         else num_gif++;
@@ -30,14 +30,19 @@ void initialize(){
   time_stack = 0;
   num_gif = 1;
 
-  file_path_1 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/background2.jpg";
-  file_path_2 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/test.png";
-  gif_file_path_1 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/gif_test_1/";
-  gif_file_path_2 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/gif_test_2/";
-  //test file path
-  normal_face_path = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/normal_face.png";
-  face_path_1 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/face_1/";
-  face_path_2 = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/images/face_2/";
+  //file path setting for switching MCU
+  //file_path_origin = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/";    //for rpi
+  file_path_origin = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/";      //for Notebook
+
+  //image file path (for test)
+  file_path_1 = file_path_origin+"images/test_1.jpg";
+  file_path_2 = file_path_origin+"images/test_2.png";
+  gif_file_path_1 = file_path_origin+"images/gif_test_1/";
+  gif_file_path_2 = file_path_origin+"images/gif_test_2/";
+  //image file path (for face)
+  normal_face_path = file_path_origin+"images/normal_face.png";
+  face_path_1 = file_path_origin+"images/face_1/";
+  face_path_2 = file_path_origin+"images/face_2/";
 
   //CheckImage(gif_file_path_2);
   normal_face = cv::imread(normal_face_path, cv::IMREAD_COLOR);
@@ -50,7 +55,7 @@ void GetDataCallback(const std_msgs::Int16& msg){
     time_stack++;
     switch(display_head){
       case 0:
-      cv::imshow("view", normal_face);
+      cv::imshow("face", normal_face);
       cv::waitKey(10);
       break;
 
@@ -63,12 +68,12 @@ void GetDataCallback(const std_msgs::Int16& msg){
       break;
 
       case 10:
-      cv::imshow("view", image_1);
+      cv::imshow("face", image_1);
       cv::waitKey(10);
       break;
 
       case 11:
-      cv::imshow("view", image_2);
+      cv::imshow("face", image_2);
       cv::waitKey(10);
       break;
 
@@ -88,13 +93,13 @@ int main(int argc, char** argv)
   ros::NodeHandle nh;
   initialize();
 
-  cv::namedWindow("view", cv::WindowFlags::WINDOW_NORMAL);
-  cv::setWindowProperty("view", cv::WindowPropertyFlags::WND_PROP_FULLSCREEN, cv::WindowFlags::WINDOW_FULLSCREEN);
+  cv::namedWindow("face", cv::WindowFlags::WINDOW_NORMAL);
+  cv::setWindowProperty("face", cv::WindowPropertyFlags::WND_PROP_FULLSCREEN, cv::WindowFlags::WINDOW_FULLSCREEN);
   cv::startWindowThread();
 
   data_sub = nh.subscribe("/navi/display",1000,GetDataCallback);
 
   ros::spin();
-  cv::destroyWindow("view");
+  cv::destroyWindow("face");
 }
 

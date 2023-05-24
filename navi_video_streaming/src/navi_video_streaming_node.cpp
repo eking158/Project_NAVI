@@ -12,7 +12,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "navi_video_streaming_node");
   ros::NodeHandle nh;
   image_transport::ImageTransport it(nh);
-  image_transport::Publisher pub = it.advertise("navi/streaming", 1);
+  image_transport::Publisher pub = it.advertise("/navi/streaming", 1);
 
   // Convert the passed as command line parameter index for the video device to an integer
   std::istringstream video_sourceCmd(argv[1]);

@@ -14,7 +14,7 @@ using namespace std;
 #include <std_msgs/Int16.h>
 
 //define
-#define PUB_HZ 100
+#define PUB_HZ 50
 
 //custom header
 
@@ -28,6 +28,7 @@ int display_head;
 int time_stack;
 int num_gif;
 string num_gif_char;
+string file_path_origin;
 string file_path_1;
 string file_path_2;
 string gif_file_path_1;

@@ -23,3 +23,6 @@ rosrun navi_control_main navi_control_main_node
 
 ### Streaming Camera Node
 rosrun navi_video_streaming navi_video_streaming_node 0
+
+### Show Face gif at Display Node
+rosrun navi_display navi_display_head_node
