@@ -16,6 +16,7 @@ find_package(catkin REQUIRED
     std_msgs
     message_generation
     dynamixel_sdk
+    roslib
 )
 
 ################################################################################
@@ -51,6 +52,7 @@ catkin_package(
     roscpp
     std_msgs
     dynamixel_sdk
+    roslib
 #  DEPENDS system_lib
 )
 
@@ -62,18 +64,17 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
 )
-
 add_executable(navi_dynamixel_up_node src/navi_dynamixel_up_node.cpp)
 add_dependencies(navi_dynamixel_up_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(navi_dynamixel_up_node ${catkin_LIBRARIES})
+target_link_libraries(navi_dynamixel_up_node ${catkin_LIBRARIES} yaml-cpp)
 
 add_executable(navi_dynamixel_middle_node src/navi_dynamixel_middle_node.cpp)
 add_dependencies(navi_dynamixel_middle_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(navi_dynamixel_middle_node ${catkin_LIBRARIES})
+target_link_libraries(navi_dynamixel_middle_node ${catkin_LIBRARIES} yaml-cpp)
 
 add_executable(navi_dynamixel_down_node src/navi_dynamixel_down_node.cpp)
 add_dependencies(navi_dynamixel_down_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(navi_dynamixel_down_node ${catkin_LIBRARIES})
+target_link_libraries(navi_dynamixel_down_node ${catkin_LIBRARIES} yaml-cpp)
 
 ################################################################################
 # Install

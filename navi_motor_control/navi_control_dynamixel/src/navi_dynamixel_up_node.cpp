@@ -43,6 +43,9 @@ Right_shoulder_pitch -> Right_shoulder_roll
 */
 
 #include <ros/ros.h>
+#include <yaml-cpp/yaml.h> 
+#include <ros/package.h>
+#include <string>
 
 #include "std_msgs/String.h"
 #include "navi_control_dynamixel/SyncGetPosition.h"
@@ -134,7 +137,7 @@ bool syncGetPresentPositionCallback(
   }
 }
 */
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void syncSetPositionCallback(const navi_control_dynamixel::SyncSetPosition::ConstPtr & msg)
 {
   uint8_t dxl_error = 0;
@@ -203,9 +206,31 @@ void syncSetPositionCallback(const navi_control_dynamixel::SyncSetPosition::Cons
 
   groupSyncWrite.clearParam();
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char ** argv)
 {
+  ros::init(argc, argv, "navi_dynamixel_up_node");
+  ros::NodeHandle nh;
+  //ros::ServiceServer sync_get_position_srv = nh.advertiseService("/sync_get_position", syncGetPresentPositionCallback);
+  ros::Subscriber sync_set_position_sub = nh.subscribe("/navi/dynamicxel_set_position_up", 10, syncSetPositionCallback);
+  //-------------------------------------------------------------------------------------------------------------------------------------------
+  std::string VelAcc_path = ros::package::getPath("navi_control_dynamixel") + "/config/vel_and_acc.yaml"; //AB param yaml
+  YAML::Node VelAcc_doc = YAML::LoadFile(VelAcc_path);
+  profile_velocity1     = VelAcc_doc["velocity_5"].as<int>();
+  profile_velocity2     = VelAcc_doc["velocity_7"].as<int>();
+  profile_velocity3     = VelAcc_doc["velocity_4"].as<int>();
+  profile_velocity4     = VelAcc_doc["velocity_6"].as<int>();
+
+  profile_accel1     = VelAcc_doc["accel_5"].as<int>();
+  profile_accel2     = VelAcc_doc["accel_7"].as<int>();
+  profile_accel3     = VelAcc_doc["accel_4"].as<int>();
+  profile_accel4     = VelAcc_doc["accel_6"].as<int>();
+
+  ROS_INFO("[id: 5]profile_velocity: %d   profile_accel: %d", profile_velocity1, profile_accel1);
+  ROS_INFO("[id: 7]profile_velocity: %d   profile_accel: %d", profile_velocity2, profile_accel2);
+  ROS_INFO("[id: 4]profile_velocity: %d   profile_accel: %d", profile_velocity3, profile_accel3);
+  ROS_INFO("[id: 6]profile_velocity: %d   profile_accel: %d", profile_velocity4, profile_accel4);
+  //--------------------------------------------------------------------------------------------------------------------------------
   uint8_t dxl_error = 0;
   int dxl_comm_result = COMM_TX_FAIL;
 
@@ -361,13 +386,9 @@ int main(int argc, char ** argv)
 
   groupSyncWrite_velocity.clearParam();
   groupSyncWrite_accel.clearParam();
+  //--------------------------------------------------------------------------------------------------------------------------------
   
   //나중에 모터 없으면 error 출력하는 부분 추가해
-
-  ros::init(argc, argv, "navi_dynamixel_up_node");
-  ros::NodeHandle nh;
-  //ros::ServiceServer sync_get_position_srv = nh.advertiseService("/sync_get_position", syncGetPresentPositionCallback);
-  ros::Subscriber sync_set_position_sub = nh.subscribe("/navi/dynamicxel_set_position_up", 10, syncSetPositionCallback);
   ros::spin();
 
   portHandler->closePort();
