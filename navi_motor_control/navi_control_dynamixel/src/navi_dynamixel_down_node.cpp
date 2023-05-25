@@ -46,6 +46,9 @@ Right_elbow_yaw -> Right_wrist_pitch -> Right_wrist_roll
 */
 
 #include <ros/ros.h>
+#include <yaml-cpp/yaml.h> 
+#include <ros/package.h>
+#include <string>
 
 #include "std_msgs/String.h"
 #include "navi_control_dynamixel/SyncGetPosition.h"
@@ -284,6 +287,43 @@ void syncSetPositionCallback(const navi_control_dynamixel::SyncSetPosition::Cons
 
 int main(int argc, char ** argv)
 {
+  ros::init(argc, argv, "navi_dynamixel_down_node");
+  ros::NodeHandle nh;
+  //ros::ServiceServer sync_get_position_srv = nh.advertiseService("/sync_get_position", syncGetPresentPositionCallback);
+  ros::Subscriber sync_set_position_sub = nh.subscribe("/navi/dynamicxel_set_position_down", 10, syncSetPositionCallback);
+  //----------------------------------------------------------------------------------------------------------------------------------
+  std::string VelAcc_path = ros::package::getPath("navi_control_dynamixel") + "/config/vel_and_acc.yaml"; //AB param yaml
+  YAML::Node VelAcc_doc = YAML::LoadFile(VelAcc_path);
+  profile_velocity1     = VelAcc_doc["velocity_1"].as<int>();
+  profile_velocity2     = VelAcc_doc["velocity_2"].as<int>();
+  profile_velocity3     = VelAcc_doc["velocity_3"].as<int>();
+  profile_velocity4     = VelAcc_doc["velocity_13"].as<int>();
+  profile_velocity5     = VelAcc_doc["velocity_15"].as<int>();
+  profile_velocity6     = VelAcc_doc["velocity_17"].as<int>();
+  profile_velocity7     = VelAcc_doc["velocity_12"].as<int>();
+  profile_velocity8     = VelAcc_doc["velocity_14"].as<int>();
+  profile_velocity9     = VelAcc_doc["velocity_16"].as<int>();
+
+  profile_accel1     = VelAcc_doc["accel_1"].as<int>();
+  profile_accel2     = VelAcc_doc["accel_2"].as<int>();
+  profile_accel3     = VelAcc_doc["accel_3"].as<int>();
+  profile_accel4     = VelAcc_doc["accel_13"].as<int>();
+  profile_accel5     = VelAcc_doc["accel_15"].as<int>();
+  profile_accel6     = VelAcc_doc["accel_17"].as<int>();
+  profile_accel7     = VelAcc_doc["accel_12"].as<int>();
+  profile_accel8     = VelAcc_doc["accel_14"].as<int>();
+  profile_accel9     = VelAcc_doc["accel_16"].as<int>();
+
+  ROS_INFO("[id: 1]profile_velocity: %d   profile_accel: %d", profile_velocity1, profile_accel1);
+  ROS_INFO("[id: 2]profile_velocity: %d   profile_accel: %d", profile_velocity2, profile_accel2);
+  ROS_INFO("[id: 3]profile_velocity: %d   profile_accel: %d", profile_velocity3, profile_accel3);
+  ROS_INFO("[id: 13]profile_velocity: %d   profile_accel: %d", profile_velocity4, profile_accel4);
+  ROS_INFO("[id: 15]profile_velocity: %d   profile_accel: %d", profile_velocity5, profile_accel5);
+  ROS_INFO("[id: 17]profile_velocity: %d   profile_accel: %d", profile_velocity6, profile_accel6);
+  ROS_INFO("[id: 12]profile_velocity: %d   profile_accel: %d", profile_velocity7, profile_accel7);
+  ROS_INFO("[id: 14]profile_velocity: %d   profile_accel: %d", profile_velocity8, profile_accel8);
+  ROS_INFO("[id: 16]profile_velocity: %d   profile_accel: %d", profile_velocity9, profile_accel9);
+  //--------------------------------------------------------------------------------------------------------------------------------
   uint8_t dxl_error = 0;
   int dxl_comm_result = COMM_TX_FAIL;
 
@@ -557,43 +597,37 @@ int main(int argc, char ** argv)
 
   dxl_comm_result = groupSyncWrite_velocity.txPacket();
   if (dxl_comm_result == COMM_SUCCESS) {
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL1_ID, profile_velocity1);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL2_ID, profile_velocity2);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL3_ID, profile_velocity3);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL4_ID, profile_velocity4);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL5_ID, profile_velocity5);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL6_ID, profile_velocity6);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL7_ID, profile_velocity7);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL8_ID, profile_velocity8);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL9_ID, profile_velocity9);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL1_ID, profile_velocity1);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL2_ID, profile_velocity2);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL3_ID, profile_velocity3);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL4_ID, profile_velocity4);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL5_ID, profile_velocity5);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL6_ID, profile_velocity6);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL7_ID, profile_velocity7);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL8_ID, profile_velocity8);
+    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL9_ID, profile_velocity9);
   } else {
     ROS_ERROR("Failed to set profile velocity! Result: %d", dxl_comm_result);
   }
   dxl_comm_result = groupSyncWrite_accel.txPacket();
   if (dxl_comm_result == COMM_SUCCESS) {
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL1_ID, profile_accel1);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL2_ID, profile_accel2);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL3_ID, profile_accel3);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL4_ID, profile_accel4);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL5_ID, profile_accel5);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL6_ID, profile_accel6);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL7_ID, profile_accel7);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL8_ID, profile_accel8);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", DXL9_ID, profile_accel9);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL1_ID, profile_accel1);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL2_ID, profile_accel2);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL3_ID, profile_accel3);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL4_ID, profile_accel4);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL5_ID, profile_accel5);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL6_ID, profile_accel6);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL7_ID, profile_accel7);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL8_ID, profile_accel8);
+    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL9_ID, profile_accel9);
   } else {
     ROS_ERROR("Failed to set profile accel! Result: %d", dxl_comm_result);
   }
 
   groupSyncWrite_velocity.clearParam();
   groupSyncWrite_accel.clearParam();
-
-  
+  //---------------------------------------------------------------------------------------------------------------------------------
   //나중에 모터 없으면 error 출력하는 부분 추가해
-
-  ros::init(argc, argv, "navi_dynamixel_down_node");
-  ros::NodeHandle nh;
-  //ros::ServiceServer sync_get_position_srv = nh.advertiseService("/sync_get_position", syncGetPresentPositionCallback);
-  ros::Subscriber sync_set_position_sub = nh.subscribe("/navi/dynamicxel_set_position_down", 10, syncSetPositionCallback);
   ros::spin();
 
   portHandler->closePort();

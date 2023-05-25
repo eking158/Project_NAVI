@@ -1,0 +1,5 @@
+<launch>    
+    <node pkg="navi_control_dynamixel" type="navi_dynamixel_up_node" name="navi_dynamixel_up_node" output="screen" /> 
+    <node pkg="navi_control_dynamixel" type="navi_dynamixel_middle_node" name="navi_dynamixel_middle_node" output="screen" /> 
+    <node pkg="navi_control_dynamixel" type="navi_dynamixel_down_node" name="navi_dynamixel_down_node" output="screen" /> 
+</launch>

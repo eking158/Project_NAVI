@@ -64,27 +64,27 @@ void initialize(){
     dynamixel_down_msg.id9=16;
 
   //up dynamixel init position setting
-    dynamixel_up_msg.position1=2040;
-    dynamixel_up_msg.position2=1658;
-    dynamixel_up_msg.position3=2040;
-    dynamixel_up_msg.position4=2407;
+    dynamixel_up_msg.position1=2040;  //id 5
+    dynamixel_up_msg.position2=2000;  //id 7
+    dynamixel_up_msg.position3=2040;  //id 4
+    dynamixel_up_msg.position4=2440;  //id 6
 
   //middle dynamixel init position setting
-    dynamixel_middle_msg.position1=2454;
-    dynamixel_middle_msg.position2=2040;
-    dynamixel_middle_msg.position3=1870;
-    dynamixel_middle_msg.position4=2040;
+    dynamixel_middle_msg.position1=2454;  //id 9
+    dynamixel_middle_msg.position2=2800;  //id 11  (2000)
+    dynamixel_middle_msg.position3=1870;  //id 8
+    dynamixel_middle_msg.position4=1200;  //id 10  (2000)
 
   //down dynamixel init position setting
-    dynamixel_down_msg.position1=2040;
-    dynamixel_down_msg.position2=2040;
-    dynamixel_down_msg.position3=2040;
-    dynamixel_down_msg.position4=2040;
-    dynamixel_down_msg.position5=2040;
-    dynamixel_down_msg.position6=2040;
-    dynamixel_down_msg.position7=2040;
-    dynamixel_down_msg.position8=2040;
-    dynamixel_down_msg.position9=2040;
+    dynamixel_down_msg.position1=2040;  //id 1
+    dynamixel_down_msg.position2=2040;  //id 2
+    dynamixel_down_msg.position3=2040;  //id 3
+    dynamixel_down_msg.position4=2040;  //id 13
+    dynamixel_down_msg.position5=2040;  //id 15
+    dynamixel_down_msg.position6=2040;  //id 17
+    dynamixel_down_msg.position7=2040;  //id 12
+    dynamixel_down_msg.position8=2040;  //id 14
+    dynamixel_down_msg.position9=2040;  //id 16
 
   //init velocity setting
     velocity_msg.linear.x=0;
@@ -117,9 +117,9 @@ void GetDataCallback(const navi_humanoid_msgs::Humanoid& msg){
 
   //middle dynamixel position setting
     dynamixel_middle_msg.position1 = msg.servo_left[2];
-    dynamixel_middle_msg.position2 = msg.servo_left[3];
+    //dynamixel_middle_msg.position2 = msg.servo_left[3];
     dynamixel_middle_msg.position3 = msg.servo_right[2];
-    dynamixel_middle_msg.position4 = msg.servo_right[3];
+    //dynamixel_middle_msg.position4 = msg.servo_right[3];
 
   //down dynamixel position setting
     dynamixel_down_msg.position1 = msg.servo_head[0];
