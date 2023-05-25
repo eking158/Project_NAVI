@@ -1,0 +1,3 @@
+<launch>    
+    <node pkg="navi_display" type="navi_display_head_node" name="navi_display_head_node" output="screen" /> 
+</launch>
