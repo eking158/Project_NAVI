@@ -342,72 +342,64 @@ int main(int argc, char ** argv)
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler, DXL1_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_INFO("Failed to enable torque for Dynamixel ID %d", DXL1_ID);
-    //ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL1_ID);
-    //return -1;
+    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL1_ID);
+    return -1;
   }
 
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler, DXL2_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_INFO("Failed to enable torque for Dynamixel ID %d", DXL2_ID);
-    //ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL2_ID);
-    //return -1;
+    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL2_ID);
+    return -1;
   }
 
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler, DXL3_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_INFO("Failed to enable torque for Dynamixel ID %d", DXL3_ID);
-    //ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL2_ID);
-    //return -1;
+    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL3_ID);
+    return -1;
   }
 
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler, DXL4_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_INFO("Failed to enable torque for Dynamixel ID %d", DXL4_ID);
-    //ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL2_ID);
-    //return -1;
+    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL4_ID);
+    return -1;
   }
 
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler, DXL5_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_INFO("Failed to enable torque for Dynamixel ID %d", DXL5_ID);
-    //return -1;
+    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL5_ID);
+    return -1;
   }
 
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler, DXL6_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_INFO("Failed to enable torque for Dynamixel ID %d", DXL6_ID);
-    //ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL2_ID);
-    //return -1;
+    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL6_ID);
+    return -1;
   }
   
-
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler, DXL7_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_INFO("Failed to enable torque for Dynamixel ID %d", DXL7_ID);
-    //return -1;
+    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL7_ID);
+    return -1;
   }
 
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler, DXL8_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_INFO("Failed to enable torque for Dynamixel ID %d", DXL8_ID);
-    //ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL2_ID);
-    //return -1;
+    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL8_ID);
+    return -1;
   }
 
   dxl_comm_result = packetHandler->write1ByteTxRx(
     portHandler, DXL9_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
   if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_INFO("Failed to enable torque for Dynamixel ID %d", DXL9_ID);
-    //ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL2_ID);
-    //return -1;
+    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL9_ID);
+    return -1;
   }
 
 
@@ -523,76 +515,76 @@ int main(int argc, char ** argv)
   //-----------------------------------------------------------------------------------------------------
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL1_ID, param_profile_velocity1);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 1");
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL2_ID, param_profile_velocity2);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 2");
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL3_ID, param_profile_velocity3);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 3");
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL4_ID, param_profile_velocity4);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 13");
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL5_ID, param_profile_velocity5);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 15");
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL6_ID, param_profile_velocity6);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 17");
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL7_ID, param_profile_velocity7);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 12");
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL8_ID, param_profile_velocity8);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 14");
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL9_ID, param_profile_velocity9);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 16");
   }
   //-----------------------------------------------------------------------------------------------------
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL1_ID, param_profile_accel1);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 1");
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL2_ID, param_profile_accel2);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 2");
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL3_ID, param_profile_accel3);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 3");
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL4_ID, param_profile_accel4);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 13");
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL5_ID, param_profile_accel5);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 15");
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL6_ID, param_profile_accel6);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 17");
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL7_ID, param_profile_accel7);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 12");
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL8_ID, param_profile_accel8);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 14");
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL9_ID, param_profile_accel9);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 16");
   }
 
   dxl_comm_result = groupSyncWrite_velocity.txPacket();
