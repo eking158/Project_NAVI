@@ -38,6 +38,49 @@ Right_elbow_yaw -> Right_wrist_roll
 
 
 #include <navi_control_main/navi_control_main_node.h>
+void GetBaseYaml(){
+  std::string Base_path = ros::package::getPath("navi_control_main") + "/config/base_position.yaml"; //AB param yaml
+  YAML::Node Base_doc = YAML::LoadFile(Base_path);
+  base_head_yaw     = Base_doc["base_head_yaw"].as<int>();
+  base_head_pitch     = Base_doc["base_head_pitch"].as<int>();
+  base_head_roll     = Base_doc["base_head_roll"].as<int>();
+
+  base_right_shoulder_pitch     = Base_doc["base_right_shoulder_pitch"].as<int>();
+  base_right_shoulder_roll     = Base_doc["base_right_shoulder_roll"].as<int>();
+  base_right_shoulder_yaw     = Base_doc["base_right_shoulder_yaw"].as<int>();
+  base_right_elbow_pitch     = Base_doc["base_right_elbow_pitch"].as<int>();
+  base_right_elbow_yaw     = Base_doc["base_right_elbow_yaw"].as<int>();
+  base_right_wrist_pitch     = Base_doc["base_right_wrist_pitch"].as<int>();
+  base_right_wrist_roll     = Base_doc["base_right_wrist_roll"].as<int>();
+
+  base_left_shoulder_pitch     = Base_doc["base_left_shoulder_pitch"].as<int>();
+  base_left_shoulder_roll     = Base_doc["base_left_shoulder_roll"].as<int>();
+  base_left_shoulder_yaw     = Base_doc["base_left_shoulder_yaw"].as<int>();
+  base_left_elbow_pitch     = Base_doc["base_left_elbow_pitch"].as<int>();
+  base_left_elbow_yaw     = Base_doc["base_left_elbow_yaw"].as<int>();
+  base_left_wrist_pitch     = Base_doc["base_left_wrist_pitch"].as<int>();
+  base_left_wrist_roll     = Base_doc["base_left_wrist_roll"].as<int>();
+
+  ROS_INFO("base_head_yaw: %d", base_head_yaw);
+  ROS_INFO("base_head_pitch: %d", base_head_pitch);
+  ROS_INFO("base_head_roll: %d", base_head_roll);
+
+  ROS_INFO("base_right_shoulder_pitch: %d", base_right_shoulder_pitch);
+  ROS_INFO("base_right_shoulder_roll: %d", base_right_shoulder_roll);
+  ROS_INFO("base_right_shoulder_yaw: %d", base_right_shoulder_yaw);
+  ROS_INFO("base_right_elbow_pitch: %d", base_right_elbow_pitch);
+  ROS_INFO("base_right_elbow_yaw: %d", base_right_elbow_yaw);
+  ROS_INFO("base_right_wrist_pitch: %d", base_right_wrist_pitch);
+  ROS_INFO("base_right_wrist_roll: %d", base_right_wrist_roll);
+
+  ROS_INFO("base_left_shoulder_pitch: %d", base_left_shoulder_pitch);
+  ROS_INFO("base_left_shoulder_roll: %d", base_left_shoulder_roll);
+  ROS_INFO("base_left_shoulder_yaw: %d", base_left_shoulder_yaw);
+  ROS_INFO("base_left_elbow_pitch: %d", base_left_elbow_pitch);
+  ROS_INFO("base_left_elbow_yaw: %d", base_left_elbow_yaw);
+  ROS_INFO("base_left_wrist_pitch: %d", base_left_wrist_pitch);
+  ROS_INFO("base_left_wrist_roll: %d", base_left_wrist_roll);
+}
 
 void initialize(){
   //up dynamixel id setting
@@ -64,27 +107,27 @@ void initialize(){
     dynamixel_down_msg.id7=16;
 
   //up dynamixel init position setting
-    dynamixel_up_msg.position1=2040;  //id 5
-    dynamixel_up_msg.position2=2000;  //id 7
-    dynamixel_up_msg.position3=2800;  //id 11  (2000)
-    dynamixel_up_msg.position4=2040;  //id 4
-    dynamixel_up_msg.position5=2440;  //id 6
-    dynamixel_up_msg.position6=1200;  //id 10  (2000)
+    dynamixel_up_msg.position1=base_left_shoulder_pitch;  //id 5
+    dynamixel_up_msg.position2=base_left_shoulder_roll;  //id 7
+    dynamixel_up_msg.position3=base_left_elbow_pitch;  //id 11  (2000)
+    dynamixel_up_msg.position4=base_right_shoulder_pitch;  //id 4
+    dynamixel_up_msg.position5=base_right_shoulder_roll;  //id 6
+    dynamixel_up_msg.position6=base_right_elbow_pitch;  //id 10  (2000)
 
   //middle dynamixel init position setting
-    dynamixel_middle_msg.position1=2454;  //id 9
-    dynamixel_middle_msg.position2=2040;  //id 15
-    dynamixel_middle_msg.position3=1870;  //id 8
-    dynamixel_middle_msg.position4=2040;  //id 14
+    dynamixel_middle_msg.position1=base_left_shoulder_yaw;  //id 9
+    dynamixel_middle_msg.position2=base_left_wrist_pitch;  //id 15
+    dynamixel_middle_msg.position3=base_right_shoulder_yaw;  //id 8
+    dynamixel_middle_msg.position4=base_right_wrist_pitch;  //id 14
 
   //down dynamixel init position setting
-    dynamixel_down_msg.position1=2040;  //id 1
-    dynamixel_down_msg.position2=2040;  //id 2
-    dynamixel_down_msg.position3=2040;  //id 3
-    dynamixel_down_msg.position4=2040;  //id 13
-    dynamixel_down_msg.position5=2040;  //id 17
-    dynamixel_down_msg.position6=2040;  //id 12
-    dynamixel_down_msg.position7=2040;  //id 16
+    dynamixel_down_msg.position1=base_head_yaw;  //id 1
+    dynamixel_down_msg.position2=base_head_pitch;  //id 2
+    dynamixel_down_msg.position3=base_head_roll;  //id 3
+    dynamixel_down_msg.position4=base_left_elbow_yaw;  //id 13
+    dynamixel_down_msg.position5=base_left_wrist_roll;  //id 17
+    dynamixel_down_msg.position6=base_right_elbow_yaw;  //id 12
+    dynamixel_down_msg.position7=base_right_wrist_roll;  //id 16
 
   //init velocity setting
     velocity_msg.linear.x=0;
@@ -158,6 +201,7 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM("Start");
   ros::init(argc, argv, "navi_control_main_node");  //init node
   ros::NodeHandle nh;
+  GetBaseYaml();
   initialize();
 
   dynamixel_up_pub = nh.advertise<navi_control_dynamixel::SyncSetPosition>("/navi/dynamicxel_set_position_up",1);

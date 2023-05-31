@@ -1,0 +1,41 @@
+base_head_yaw: 2040             #id1 dynamixel (Head_Yaw)          (default: 2040)
+base_head_pitch: 2040           #id2 dynamixel (Head_Pitch)        (default: 2040)
+base_head_roll: 2040            #id3 dynamixel (Head_Roll)         (default: 2040)
+
+base_right_shoulder_pitch: 2236 #id4 dynamixel (R_Shoulder_Pitch)  (default: 2236)
+base_right_shoulder_roll: 2266 #id6 dynamixel (R_Shoulder_Roll)   (default: 2266)
+base_right_shoulder_yaw: 2304 #id8 dynamixel (R_Shoulder_yaw)    (default: 2304)
+base_right_elbow_pitch: 1163 #id10 dynamixel (R_Elbow_Pitch)   (default: 1163)
+base_right_elbow_yaw: 2104 #id12 dynamixel (R_Elbow_Yaw)     (default: 2104)
+base_right_wrist_pitch: 1949 #id14 dynamixel (R_Wrist_Pitch)   (default: 1949)
+base_right_wrist_roll: 1885 #id16 dynamixel (R_Wrist_Roll)    (default: 1885)
+
+base_left_shoulder_pitch: 1760 #id5 dynamixel (L_Shoulder_Pitch)  (default: 1760)
+base_left_shoulder_roll: 2022 #id7 dynamixel (L_Shoulder_Roll)   (default: 2022)
+base_left_shoulder_yaw: 2084 #id9 dynamixel (L_Shoulder_yaw)    (default: 2084)
+base_left_elbow_pitch: 3070 #id11 dynamixel (L_Elbow_Pitch)   (default: 3070)
+base_left_elbow_yaw: 1982 #id13 dynamixel (L_Elbow_Yaw)     (default: 1982)
+base_left_wrist_pitch: 1782 #id15 dynamixel (L_Wrist_Pitch)   (default: 1782)
+base_left_wrist_roll: 2005 #id17 dynamixel (L_Wrist_Roll)    (default: 2005)
+
+
+#head_yaw -> head_pitch -> head_roll
+#1 -> 2 -> 3
+
+#Left_elbow_yaw -> Left_wrist_pitch -> Left_wrist_roll
+#13 -> 15 -> 17
+
+#Right_elbow_yaw -> Right_wrist_pitch -> Right_wrist_roll
+#12 -> 14 -> 16
+
+#Left_shoulder_yaw -> Left_elbow_pitch
+#9 -> 11
+
+#Right_shoulder_yaw -> Right_elbow_pitch
+#8 -> 10
+
+#Left_shoulder_pitch -> Left_shoulder_roll
+#5 -> 7
+
+#Right_shoulder_pitch -> Right_shoulder_roll
+#4 -> 6
