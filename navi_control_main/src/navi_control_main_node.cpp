@@ -11,18 +11,18 @@ Right_shoulder_pitch -> Right_shoulder_roll -> Right_shoulder_yaw -> Right_elbow
 
 /*
 <dynamixel up>->xm540 
-Left_shoulder_pitch -> Left_shoulder_roll
-5 -> 7
+Left_shoulder_pitch -> Left_shoulder_roll --> Left_elbow_pitch
+5 -> 7 --> 11
 
-Right_shoulder_pitch -> Right_shoulder_roll
-4 -> 6
+Right_shoulder_pitch -> Right_shoulder_roll  --> Right_elbow_pitch
+4 -> 6 --> 10
 -----------------------------------------------------------------
 <dynamixel middle>->xm430
-Left_shoulder_yaw -> Left_elbow_pitch
-9 -> 11
+Left_shoulder_yaw
+9
 
-Right_shoulder_yaw -> Right_elbow_pitch
-8 -> 10
+Right_shoulder_yaw
+8
 -----------------------------------------------------------------
 <dynamixel down>->mx28 xl430
 head_yaw -> head_pitch -> head_roll
@@ -43,14 +43,14 @@ void initialize(){
   //up dynamixel id setting
     dynamixel_up_msg.id1=5;
     dynamixel_up_msg.id2=7;
-    dynamixel_up_msg.id3=4;
-    dynamixel_up_msg.id4=6;
+    dynamixel_up_msg.id3=11;
+    dynamixel_up_msg.id4=4;
+    dynamixel_up_msg.id5=6;
+    dynamixel_up_msg.id6=10;
 
   //middle dynamixel id setting
     dynamixel_middle_msg.id1=9;
-    dynamixel_middle_msg.id2=11;
-    dynamixel_middle_msg.id3=8;
-    dynamixel_middle_msg.id4=10;
+    dynamixel_middle_msg.id2=8;
 
   //down dynamixel id setting
     dynamixel_down_msg.id1=1;
@@ -66,14 +66,14 @@ void initialize(){
   //up dynamixel init position setting
     dynamixel_up_msg.position1=2040;  //id 5
     dynamixel_up_msg.position2=2000;  //id 7
-    dynamixel_up_msg.position3=2040;  //id 4
-    dynamixel_up_msg.position4=2440;  //id 6
+    dynamixel_up_msg.position2=2800;  //id 11  (2000)
+    dynamixel_up_msg.position4=2040;  //id 4
+    dynamixel_up_msg.position5=2440;  //id 6
+    dynamixel_up_msg.position4=1200;  //id 10  (2000)
 
   //middle dynamixel init position setting
     dynamixel_middle_msg.position1=2454;  //id 9
-    dynamixel_middle_msg.position2=2800;  //id 11  (2000)
-    dynamixel_middle_msg.position3=1870;  //id 8
-    dynamixel_middle_msg.position4=1200;  //id 10  (2000)
+    dynamixel_middle_msg.position2=1870;  //id 8
 
   //down dynamixel init position setting
     dynamixel_down_msg.position1=2040;  //id 1
@@ -112,14 +112,14 @@ void GetDataCallback(const navi_humanoid_msgs::Humanoid& msg){
   //up dynamixel position setting
     dynamixel_up_msg.position1 = msg.servo_left[0];
     dynamixel_up_msg.position2 = msg.servo_left[1];
-    dynamixel_up_msg.position3 = msg.servo_right[0];
-    dynamixel_up_msg.position4 = msg.servo_right[1];
+    dynamixel_up_msg.position3 = msg.servo_left[3];
+    dynamixel_up_msg.position4 = msg.servo_right[0];
+    dynamixel_up_msg.position5 = msg.servo_right[1];
+    dynamixel_up_msg.position6 = msg.servo_right[3];
 
   //middle dynamixel position setting
     dynamixel_middle_msg.position1 = msg.servo_left[2];
-    //dynamixel_middle_msg.position2 = msg.servo_left[3];
-    dynamixel_middle_msg.position3 = msg.servo_right[2];
-    //dynamixel_middle_msg.position4 = msg.servo_right[3];
+    dynamixel_middle_msg.position2 = msg.servo_right[2];
 
   //down dynamixel position setting
     dynamixel_down_msg.position1 = msg.servo_head[0];
