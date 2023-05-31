@@ -46,7 +46,6 @@ void initialize(){
 
   //CheckImage(gif_file_path_2);
   normal_face = cv::imread(normal_face_path, cv::IMREAD_COLOR);
-  cv::Mat normal_face_rotate;
   cv::rotate(normal_face, normal_face_rotate, cv::ROTATE_90_CLOCKWISE);
   image_1 = cv::imread(file_path_1, cv::IMREAD_COLOR);
   image_2 = cv::imread(file_path_2, cv::IMREAD_COLOR);

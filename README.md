@@ -11,9 +11,9 @@ rosrun navi_control_dynamixel navi_dynamixel_middle_node
 rosrun navi_control_dynamixel navi_dynamixel_down_node
 
 ### Arduino Control Node
-rosrun rosserial_python serial_node.py _port:=/dev/ttyACM0 _baud:=57600
+rosrun rosserial_python serial_node.py _port:=/dev/navi_hand _baud:=57600 __node:=navi_hand
 
-rosrun rosserial_python serial_node.py _port:=/dev/ttyACM1 _baud:=57600
+rosrun rosserial_python serial_node.py _port:=/dev/navi_dc _baud:=57600  __node:=navi_dc
 
 ### MD Motor Control Node
 roslaunch md md_robot_node.launch 

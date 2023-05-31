@@ -38,6 +38,7 @@ string face_path_1;
 string face_path_2;
 
 cv::Mat normal_face;
+cv::Mat normal_face_rotate;
 cv::Mat image_1;
 cv::Mat image_2;
 

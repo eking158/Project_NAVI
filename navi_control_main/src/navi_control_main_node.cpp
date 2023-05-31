@@ -18,21 +18,21 @@ Right_shoulder_pitch -> Right_shoulder_roll  --> Right_elbow_pitch
 4 -> 6 --> 10
 -----------------------------------------------------------------
 <dynamixel middle>->xm430
-Left_shoulder_yaw
-9
+Left_shoulder_yaw -> Left_wrist_pitch 
+9 -> 15
 
-Right_shoulder_yaw
-8
+Right_shoulder_yaw -> Right_wrist_pitch
+8 -> 14
 -----------------------------------------------------------------
 <dynamixel down>->mx28 xl430
 head_yaw -> head_pitch -> head_roll
 1 -> 2 -> 3
 
-Left_elbow_yaw -> Left_wrist_pitch -> Left_wrist_roll
-13 -> 15 -> 17
+Left_elbow_yaw -> Left_wrist_roll
+13 -> 17
 
-Right_elbow_yaw -> Right_wrist_pitch -> Right_wrist_roll
-12 -> 14 -> 16
+Right_elbow_yaw -> Right_wrist_roll
+12 -> 16
 */
 
 
@@ -50,41 +50,41 @@ void initialize(){
 
   //middle dynamixel id setting
     dynamixel_middle_msg.id1=9;
-    dynamixel_middle_msg.id2=8;
+    dynamixel_middle_msg.id2=15;
+    dynamixel_middle_msg.id3=8;
+    dynamixel_middle_msg.id4=14;
 
   //down dynamixel id setting
     dynamixel_down_msg.id1=1;
     dynamixel_down_msg.id2=2;
     dynamixel_down_msg.id3=3;
     dynamixel_down_msg.id4=13;
-    dynamixel_down_msg.id5=15;
-    dynamixel_down_msg.id6=17;
-    dynamixel_down_msg.id7=12;
-    dynamixel_down_msg.id8=14;
-    dynamixel_down_msg.id9=16;
+    dynamixel_down_msg.id5=17;
+    dynamixel_down_msg.id6=12;
+    dynamixel_down_msg.id7=16;
 
   //up dynamixel init position setting
     dynamixel_up_msg.position1=2040;  //id 5
     dynamixel_up_msg.position2=2000;  //id 7
-    dynamixel_up_msg.position2=2800;  //id 11  (2000)
+    dynamixel_up_msg.position3=2800;  //id 11  (2000)
     dynamixel_up_msg.position4=2040;  //id 4
     dynamixel_up_msg.position5=2440;  //id 6
-    dynamixel_up_msg.position4=1200;  //id 10  (2000)
+    dynamixel_up_msg.position6=1200;  //id 10  (2000)
 
   //middle dynamixel init position setting
     dynamixel_middle_msg.position1=2454;  //id 9
-    dynamixel_middle_msg.position2=1870;  //id 8
+    dynamixel_middle_msg.position2=2040;  //id 15
+    dynamixel_middle_msg.position3=1870;  //id 8
+    dynamixel_middle_msg.position4=2040;  //id 14
 
   //down dynamixel init position setting
     dynamixel_down_msg.position1=2040;  //id 1
     dynamixel_down_msg.position2=2040;  //id 2
     dynamixel_down_msg.position3=2040;  //id 3
     dynamixel_down_msg.position4=2040;  //id 13
-    dynamixel_down_msg.position5=2040;  //id 15
-    dynamixel_down_msg.position6=2040;  //id 17
-    dynamixel_down_msg.position7=2040;  //id 12
-    dynamixel_down_msg.position8=2040;  //id 14
-    dynamixel_down_msg.position9=2040;  //id 16
+    dynamixel_down_msg.position5=2040;  //id 17
+    dynamixel_down_msg.position6=2040;  //id 12
+    dynamixel_down_msg.position7=2040;  //id 16
 
   //init velocity setting
     velocity_msg.linear.x=0;
@@ -110,27 +110,27 @@ void initialize(){
 
 void GetDataCallback(const navi_humanoid_msgs::Humanoid& msg){
   //up dynamixel position setting
-    dynamixel_up_msg.position1 = msg.servo_left[0];
-    dynamixel_up_msg.position2 = msg.servo_left[1];
-    dynamixel_up_msg.position3 = msg.servo_left[3];
-    dynamixel_up_msg.position4 = msg.servo_right[0];
-    dynamixel_up_msg.position5 = msg.servo_right[1];
-    dynamixel_up_msg.position6 = msg.servo_right[3];
+    dynamixel_up_msg.position1 = msg.servo_left[0];  //5
+    dynamixel_up_msg.position2 = msg.servo_left[1];  //7
+    dynamixel_up_msg.position3 = msg.servo_left[3];  //11
+    dynamixel_up_msg.position4 = msg.servo_right[0]; //4
+    dynamixel_up_msg.position5 = msg.servo_right[1]; //6
+    dynamixel_up_msg.position6 = msg.servo_right[3]; //10
 
   //middle dynamixel position setting
-    dynamixel_middle_msg.position1 = msg.servo_left[2];
-    dynamixel_middle_msg.position2 = msg.servo_right[2];
+    dynamixel_middle_msg.position1 = msg.servo_left[2];  //9
+    dynamixel_middle_msg.position2 = msg.servo_left[5];  //15
+    dynamixel_middle_msg.position3 = msg.servo_right[2]; //8
+    dynamixel_middle_msg.position4 = msg.servo_right[5]; //4
 
   //down dynamixel position setting
-    dynamixel_down_msg.position1 = msg.servo_head[0];
-    dynamixel_down_msg.position2 = msg.servo_head[1];
-    dynamixel_down_msg.position3 = msg.servo_head[2];
-    dynamixel_down_msg.position4 = msg.servo_left[4];
-    dynamixel_down_msg.position5 = msg.servo_left[5];
-    dynamixel_down_msg.position6 = msg.servo_left[6];
-    dynamixel_down_msg.position7 = msg.servo_right[4];
-    dynamixel_down_msg.position8 = msg.servo_right[5];
-    dynamixel_down_msg.position9 = msg.servo_right[6];
+    dynamixel_down_msg.position1 = msg.servo_head[0];  //1
+    dynamixel_down_msg.position2 = msg.servo_head[1];  //2
+    dynamixel_down_msg.position3 = msg.servo_head[2];  //3
+    dynamixel_down_msg.position4 = msg.servo_left[4];  //13
+    dynamixel_down_msg.position5 = msg.servo_left[6];  //17
+    dynamixel_down_msg.position6 = msg.servo_right[4]; //12
+    dynamixel_down_msg.position7 = msg.servo_right[6]; //16
 
   //velocity setting
     velocity_msg.linear.x = msg.cmd[0];

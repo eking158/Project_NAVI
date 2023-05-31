@@ -38,11 +38,11 @@ Control NAVI down Dynamixels
 head_yaw -> head_pitch -> head_roll
 1 -> 2 -> 3
 
-Left_elbow_yaw -> Left_wrist_pitch -> Left_wrist_roll
-13 -> 15 -> 17
+Left_elbow_yaw -> Left_wrist_roll
+13 -> 17
 
-Right_elbow_yaw -> Right_wrist_pitch -> Right_wrist_roll
-12 -> 14 -> 16
+Right_elbow_yaw -> Right_wrist_roll
+12 -> 16
 */
 
 #include <ros/ros.h>
@@ -70,8 +70,6 @@ uint32_t profile_velocity4 = 100;
 uint32_t profile_velocity5 = 100;
 uint32_t profile_velocity6 = 100;
 uint32_t profile_velocity7 = 100;
-uint32_t profile_velocity8 = 100;
-uint32_t profile_velocity9 = 100;
 uint32_t profile_accel1 = 30;
 uint32_t profile_accel2 = 30;
 uint32_t profile_accel3 = 30;
@@ -79,22 +77,18 @@ uint32_t profile_accel4 = 2;
 uint32_t profile_accel5 = 2;
 uint32_t profile_accel6 = 2;
 uint32_t profile_accel7 = 2;
-uint32_t profile_accel8 = 2;
-uint32_t profile_accel9 = 2;
 
 // Protocol version
 #define PROTOCOL_VERSION      2.0             // Default Protocol version of DYNAMIXEL X series.
 
 // Default setting
-#define DXL1_ID               1              // DXL1 ID
-#define DXL2_ID               2              // DXL2 ID
-#define DXL3_ID               3              // DXL3 ID
+#define DXL1_ID               1               // DXL1 ID
+#define DXL2_ID               2               // DXL2 ID
+#define DXL3_ID               3               // DXL3 ID
 #define DXL4_ID               13              // DXL4 ID
-#define DXL5_ID               15              // DXL5 ID
-#define DXL6_ID               17              // DXL6 ID
-#define DXL7_ID               12              // DXL7 ID
-#define DXL8_ID               14             // DXL8 ID
-#define DXL9_ID               16             // DXL9 ID
+#define DXL5_ID               17              // DXL5 ID
+#define DXL6_ID               12              // DXL6 ID
+#define DXL7_ID               16              // DXL7 ID
 #define BAUDRATE              1000000           // Default Baudrate of DYNAMIXEL X series
 #define DEVICE_NAME           "/dev/navi_28"  // [Linux] To find assigned port, use "$ ls /dev/ttyUSB*" command
 
@@ -169,8 +163,6 @@ void syncSetPositionCallback(const navi_control_dynamixel::SyncSetPosition::Cons
   uint8_t param_goal_position5[4];
   uint8_t param_goal_position6[4];
   uint8_t param_goal_position7[4];
-  uint8_t param_goal_position8[4];
-  uint8_t param_goal_position9[4];
 
   // Position Value of X series is 4 byte data. For AX & MX(1.0) use 2 byte data(uint16_t) for the Position Value.
   uint32_t position1 = (unsigned int)msg->position1; // Convert int32 -> uint32
@@ -208,16 +200,6 @@ void syncSetPositionCallback(const navi_control_dynamixel::SyncSetPosition::Cons
   param_goal_position7[1] = DXL_HIBYTE(DXL_LOWORD(position7));
   param_goal_position7[2] = DXL_LOBYTE(DXL_HIWORD(position7));
   param_goal_position7[3] = DXL_HIBYTE(DXL_HIWORD(position7));
-  uint32_t position8 = (unsigned int)msg->position8; // Convert int32 -> uint32
-  param_goal_position8[0] = DXL_LOBYTE(DXL_LOWORD(position8));
-  param_goal_position8[1] = DXL_HIBYTE(DXL_LOWORD(position8));
-  param_goal_position8[2] = DXL_LOBYTE(DXL_HIWORD(position8));
-  param_goal_position8[3] = DXL_HIBYTE(DXL_HIWORD(position8));
-  uint32_t position9 = (unsigned int)msg->position9; // Convert int32 -> uint32
-  param_goal_position9[0] = DXL_LOBYTE(DXL_LOWORD(position9));
-  param_goal_position9[1] = DXL_HIBYTE(DXL_LOWORD(position9));
-  param_goal_position9[2] = DXL_LOBYTE(DXL_HIWORD(position9));
-  param_goal_position9[3] = DXL_HIBYTE(DXL_HIWORD(position9));
   //-----------------------------------------------------------------------------------------------------
   // Write Goal Position (length : 4 bytes)
   // When writing 2 byte data to AX / MX(1.0), use write2ByteTxRx() instead.
@@ -256,15 +238,6 @@ void syncSetPositionCallback(const navi_control_dynamixel::SyncSetPosition::Cons
   if (dxl_addparam_result != true) {
     ROS_ERROR( "Failed to addparam to groupSyncWrite for Dynamixel ID %d", msg->id7);
   }
-
-  dxl_addparam_result = groupSyncWrite.addParam((uint8_t)msg->id8, param_goal_position8);
-  if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam to groupSyncWrite for Dynamixel ID %d", msg->id8);
-  }
-  dxl_addparam_result = groupSyncWrite.addParam((uint8_t)msg->id9, param_goal_position9);
-  if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam to groupSyncWrite for Dynamixel ID %d", msg->id9);
-  }
   //-----------------------------------------------------------------------------------------------------
   dxl_comm_result = groupSyncWrite.txPacket();
   if (dxl_comm_result == COMM_SUCCESS) {
@@ -275,8 +248,6 @@ void syncSetPositionCallback(const navi_control_dynamixel::SyncSetPosition::Cons
     ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", msg->id5, msg->position5);
     ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", msg->id6, msg->position6);
     ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", msg->id7, msg->position7);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", msg->id8, msg->position8);
-    ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", msg->id9, msg->position9);
   } else {
     ROS_ERROR("Failed to set position! Result: %d", dxl_comm_result);
   }
@@ -298,21 +269,17 @@ int main(int argc, char ** argv)
   profile_velocity2     = VelAcc_doc["velocity_2"].as<int>();
   profile_velocity3     = VelAcc_doc["velocity_3"].as<int>();
   profile_velocity4     = VelAcc_doc["velocity_13"].as<int>();
-  profile_velocity5     = VelAcc_doc["velocity_15"].as<int>();
-  profile_velocity6     = VelAcc_doc["velocity_17"].as<int>();
-  profile_velocity7     = VelAcc_doc["velocity_12"].as<int>();
-  profile_velocity8     = VelAcc_doc["velocity_14"].as<int>();
-  profile_velocity9     = VelAcc_doc["velocity_16"].as<int>();
+  profile_velocity5     = VelAcc_doc["velocity_17"].as<int>();
+  profile_velocity6     = VelAcc_doc["velocity_12"].as<int>();
+  profile_velocity7     = VelAcc_doc["velocity_16"].as<int>();
 
   profile_accel1     = VelAcc_doc["accel_1"].as<int>();
   profile_accel2     = VelAcc_doc["accel_2"].as<int>();
   profile_accel3     = VelAcc_doc["accel_3"].as<int>();
   profile_accel4     = VelAcc_doc["accel_13"].as<int>();
-  profile_accel5     = VelAcc_doc["accel_15"].as<int>();
-  profile_accel6     = VelAcc_doc["accel_17"].as<int>();
-  profile_accel7     = VelAcc_doc["accel_12"].as<int>();
-  profile_accel8     = VelAcc_doc["accel_14"].as<int>();
-  profile_accel9     = VelAcc_doc["accel_16"].as<int>();
+  profile_accel5     = VelAcc_doc["accel_17"].as<int>();
+  profile_accel6     = VelAcc_doc["accel_12"].as<int>();
+  profile_accel7     = VelAcc_doc["accel_16"].as<int>();
 
   ROS_INFO("[id: 1]profile_velocity: %d   profile_accel: %d", profile_velocity1, profile_accel1);
   ROS_INFO("[id: 2]profile_velocity: %d   profile_accel: %d", profile_velocity2, profile_accel2);
@@ -321,8 +288,6 @@ int main(int argc, char ** argv)
   ROS_INFO("[id: 15]profile_velocity: %d   profile_accel: %d", profile_velocity5, profile_accel5);
   ROS_INFO("[id: 17]profile_velocity: %d   profile_accel: %d", profile_velocity6, profile_accel6);
   ROS_INFO("[id: 12]profile_velocity: %d   profile_accel: %d", profile_velocity7, profile_accel7);
-  ROS_INFO("[id: 14]profile_velocity: %d   profile_accel: %d", profile_velocity8, profile_accel8);
-  ROS_INFO("[id: 16]profile_velocity: %d   profile_accel: %d", profile_velocity9, profile_accel9);
   //--------------------------------------------------------------------------------------------------------------------------------
   uint8_t dxl_error = 0;
   int dxl_comm_result = COMM_TX_FAIL;
@@ -388,20 +353,6 @@ int main(int argc, char ** argv)
     return -1;
   }
 
-  dxl_comm_result = packetHandler->write1ByteTxRx(
-    portHandler, DXL8_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
-  if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL8_ID);
-    return -1;
-  }
-
-  dxl_comm_result = packetHandler->write1ByteTxRx(
-    portHandler, DXL9_ID, ADDR_TORQUE_ENABLE, 1, &dxl_error);
-  if (dxl_comm_result != COMM_SUCCESS) {
-    ROS_ERROR("Failed to enable torque for Dynamixel ID %d", DXL9_ID);
-    return -1;
-  }
-
 
   uint8_t param_profile_velocity1[4]; // Convert int32 -> uint32
   uint8_t param_profile_velocity2[4]; // Convert int32 -> uint32
@@ -410,8 +361,6 @@ int main(int argc, char ** argv)
   uint8_t param_profile_velocity5[4]; // Convert int32 -> uint32
   uint8_t param_profile_velocity6[4]; // Convert int32 -> uint32
   uint8_t param_profile_velocity7[4]; // Convert int32 -> uint32
-  uint8_t param_profile_velocity8[4]; // Convert int32 -> uint32
-  uint8_t param_profile_velocity9[4]; // Convert int32 -> uint32
 
   param_profile_velocity1[0] = DXL_LOBYTE(DXL_LOWORD(profile_velocity1));
   param_profile_velocity1[1] = DXL_HIBYTE(DXL_LOWORD(profile_velocity1));
@@ -448,16 +397,6 @@ int main(int argc, char ** argv)
   param_profile_velocity7[2] = DXL_LOBYTE(DXL_HIWORD(profile_velocity7));
   param_profile_velocity7[3] = DXL_HIBYTE(DXL_HIWORD(profile_velocity7));
 
-  param_profile_velocity8[0] = DXL_LOBYTE(DXL_LOWORD(profile_velocity8));
-  param_profile_velocity8[1] = DXL_HIBYTE(DXL_LOWORD(profile_velocity8));
-  param_profile_velocity8[2] = DXL_LOBYTE(DXL_HIWORD(profile_velocity8));
-  param_profile_velocity8[3] = DXL_HIBYTE(DXL_HIWORD(profile_velocity8));
-
-  param_profile_velocity9[0] = DXL_LOBYTE(DXL_LOWORD(profile_velocity9));
-  param_profile_velocity9[1] = DXL_HIBYTE(DXL_LOWORD(profile_velocity9));
-  param_profile_velocity9[2] = DXL_LOBYTE(DXL_HIWORD(profile_velocity9));
-  param_profile_velocity9[3] = DXL_HIBYTE(DXL_HIWORD(profile_velocity9));
-
   uint8_t param_profile_accel1[4]; // Convert int32 -> uint32
   uint8_t param_profile_accel2[4]; // Convert int32 -> uint32
   uint8_t param_profile_accel3[4]; // Convert int32 -> uint32
@@ -465,8 +404,6 @@ int main(int argc, char ** argv)
   uint8_t param_profile_accel5[4]; // Convert int32 -> uint32
   uint8_t param_profile_accel6[4]; // Convert int32 -> uint32
   uint8_t param_profile_accel7[4]; // Convert int32 -> uint32
-  uint8_t param_profile_accel8[4]; // Convert int32 -> uint32
-  uint8_t param_profile_accel9[4]; // Convert int32 -> uint32
 
   param_profile_accel1[0] = DXL_LOBYTE(DXL_LOWORD(profile_accel1));
   param_profile_accel1[1] = DXL_HIBYTE(DXL_LOWORD(profile_accel1));
@@ -502,16 +439,6 @@ int main(int argc, char ** argv)
   param_profile_accel7[1] = DXL_HIBYTE(DXL_LOWORD(profile_accel7));
   param_profile_accel7[2] = DXL_LOBYTE(DXL_HIWORD(profile_accel7));
   param_profile_accel7[3] = DXL_HIBYTE(DXL_HIWORD(profile_accel7));
-
-  param_profile_accel8[0] = DXL_LOBYTE(DXL_LOWORD(profile_accel8));
-  param_profile_accel8[1] = DXL_HIBYTE(DXL_LOWORD(profile_accel8));
-  param_profile_accel8[2] = DXL_LOBYTE(DXL_HIWORD(profile_accel8));
-  param_profile_accel8[3] = DXL_HIBYTE(DXL_HIWORD(profile_accel8));
-
-  param_profile_accel9[0] = DXL_LOBYTE(DXL_LOWORD(profile_accel9));
-  param_profile_accel9[1] = DXL_HIBYTE(DXL_LOWORD(profile_accel9));
-  param_profile_accel9[2] = DXL_LOBYTE(DXL_HIWORD(profile_accel9));
-  param_profile_accel9[3] = DXL_HIBYTE(DXL_HIWORD(profile_accel9));
   //-----------------------------------------------------------------------------------------------------
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL1_ID, param_profile_velocity1);
   if (dxl_addparam_result != true) {
@@ -531,21 +458,13 @@ int main(int argc, char ** argv)
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL5_ID, param_profile_velocity5);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 15");
+    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 17");
   }
   dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL6_ID, param_profile_velocity6);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 17");
-  }
-  dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL7_ID, param_profile_velocity7);
-  if (dxl_addparam_result != true) {
     ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 12");
   }
-  dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL8_ID, param_profile_velocity8);
-  if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 14");
-  }
-  dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL9_ID, param_profile_velocity9);
+  dxl_addparam_result = groupSyncWrite_velocity.addParam((uint8_t)DXL7_ID, param_profile_velocity7);
   if (dxl_addparam_result != true) {
     ROS_ERROR( "Failed to addparam velocity to groupSyncWrite for Dynamixel ID 16");
   }
@@ -568,21 +487,13 @@ int main(int argc, char ** argv)
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL5_ID, param_profile_accel5);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 15");
+    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 17");
   }
   dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL6_ID, param_profile_accel6);
   if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 17");
-  }
-  dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL7_ID, param_profile_accel7);
-  if (dxl_addparam_result != true) {
     ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 12");
   }
-  dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL8_ID, param_profile_accel8);
-  if (dxl_addparam_result != true) {
-    ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 14");
-  }
-  dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL9_ID, param_profile_accel9);
+  dxl_addparam_result = groupSyncWrite_accel.addParam((uint8_t)DXL7_ID, param_profile_accel7);
   if (dxl_addparam_result != true) {
     ROS_ERROR( "Failed to addparam accel to groupSyncWrite for Dynamixel ID 16");
   }
@@ -596,8 +507,6 @@ int main(int argc, char ** argv)
     ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL5_ID, profile_velocity5);
     ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL6_ID, profile_velocity6);
     ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL7_ID, profile_velocity7);
-    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL8_ID, profile_velocity8);
-    ROS_INFO("setVelocity : [ID:%d] [Velocity:%d]", DXL9_ID, profile_velocity9);
   } else {
     ROS_ERROR("Failed to set profile velocity! Result: %d", dxl_comm_result);
   }
@@ -610,8 +519,6 @@ int main(int argc, char ** argv)
     ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL5_ID, profile_accel5);
     ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL6_ID, profile_accel6);
     ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL7_ID, profile_accel7);
-    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL8_ID, profile_accel8);
-    ROS_INFO("setAccel : [ID:%d] [Accel:%d]", DXL9_ID, profile_accel9);
   } else {
     ROS_ERROR("Failed to set profile accel! Result: %d", dxl_comm_result);
   }
