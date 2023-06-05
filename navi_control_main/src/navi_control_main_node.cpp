@@ -64,27 +64,27 @@ void initialize(){
     dynamixel_down_msg.id9=16;
 
   //up dynamixel init position setting
-    dynamixel_up_msg.position1=2040;  //id 5
-    dynamixel_up_msg.position2=2000;  //id 7
-    dynamixel_up_msg.position2=2800;  //id 11  (2000)
-    dynamixel_up_msg.position4=2040;  //id 4
-    dynamixel_up_msg.position5=2440;  //id 6
-    dynamixel_up_msg.position4=1200;  //id 10  (2000)
+    dynamixel_up_msg.position1=1760;  //id 5
+    dynamixel_up_msg.position2=2022;  //id 7
+    dynamixel_up_msg.position3=3070;  //id 11  (2000)
+    dynamixel_up_msg.position4=2236;  //id 4
+    dynamixel_up_msg.position5=2266;  //id 6
+    dynamixel_up_msg.position6=1163;  //id 10  (2000)
 
   //middle dynamixel init position setting
-    dynamixel_middle_msg.position1=2454;  //id 9
-    dynamixel_middle_msg.position2=1870;  //id 8
+    dynamixel_middle_msg.position1=2084;  //id 9
+    dynamixel_middle_msg.position2=2304;  //id 8
 
   //down dynamixel init position setting
     dynamixel_down_msg.position1=2040;  //id 1
     dynamixel_down_msg.position2=2040;  //id 2
     dynamixel_down_msg.position3=2040;  //id 3
-    dynamixel_down_msg.position4=2040;  //id 13
-    dynamixel_down_msg.position5=2040;  //id 15
-    dynamixel_down_msg.position6=2040;  //id 17
-    dynamixel_down_msg.position7=2040;  //id 12
-    dynamixel_down_msg.position8=2040;  //id 14
-    dynamixel_down_msg.position9=2040;  //id 16
+    dynamixel_down_msg.position4=1982;  //id 13
+    dynamixel_down_msg.position5=1782;  //id 15
+    dynamixel_down_msg.position6=2005;  //id 17
+    dynamixel_down_msg.position7=2104;  //id 12
+    dynamixel_down_msg.position8=1949;  //id 14
+    dynamixel_down_msg.position9=1885;  //id 16
 
   //init velocity setting
     velocity_msg.linear.x=0;
