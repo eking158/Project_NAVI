@@ -7,7 +7,7 @@ base_right_shoulder_roll: 2266 #id6 dynamixel (R_Shoulder_Roll)   (default: 2266
 base_right_shoulder_yaw: 2304 #id8 dynamixel (R_Shoulder_yaw)    (default: 2304)
 base_right_elbow_pitch: 1163 #id10 dynamixel (R_Elbow_Pitch)   (default: 1163)
 base_right_elbow_yaw: 2104 #id12 dynamixel (R_Elbow_Yaw)     (default: 2104)
-base_right_wrist_pitch: 1949 #id14 dynamixel (R_Wrist_Pitch)   (default: 1949)
+base_right_wrist_pitch: 2300 #id14 dynamixel (R_Wrist_Pitch)   (default: 2104)
 base_right_wrist_roll: 1885 #id16 dynamixel (R_Wrist_Roll)    (default: 1885)
 
 base_left_shoulder_pitch: 1760 #id5 dynamixel (L_Shoulder_Pitch)  (default: 1760)
