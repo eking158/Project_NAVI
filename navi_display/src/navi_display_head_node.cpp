@@ -12,15 +12,15 @@ void CheckImage(const char* path){
 
 void GIFShow(string path, int* now_time, int frame_num, float frame_time){
   if(*now_time > frame_time*PUB_HZ){
-        //ROS_INFO("%d", *now_time);
+        if(num_gif>=frame_num) num_gif=1;
+        else num_gif++;
+        //ROS_INFO("%d", num_gif);
         num_gif_char=to_string(num_gif);
         cv::Mat gif = cv::imread(path+num_gif_char+".png", cv::IMREAD_COLOR);
         cv::Mat gif_rotate;
-        cv::rotate(gif, gif_rotate, cv::ROTATE_90_CLOCKWISE);
+        cv::rotate(gif, gif_rotate, cv::ROTATE_90_COUNTERCLOCKWISE);
         cv::imshow("face", gif_rotate);
         cv::waitKey(10);
-        if(num_gif==frame_num) num_gif=1;
-        else num_gif++;
         *now_time=0;
       }
 }
@@ -43,10 +43,15 @@ void initialize(){
   normal_face_path = file_path_origin+"images/normal_face.png";
   face_path_1 = file_path_origin+"images/face_1/";
   face_path_2 = file_path_origin+"images/face_2/";
+  face_path_3 = file_path_origin+"images/face_3/";
+  face_path_4 = file_path_origin+"images/face_4/";
+  face_path_5 = file_path_origin+"images/face_5/";
+  face_path_6 = file_path_origin+"images/face_6/";
+  face_path_7 = file_path_origin+"images/face_7/";
 
   //CheckImage(gif_file_path_2);
   normal_face = cv::imread(normal_face_path, cv::IMREAD_COLOR);
-  cv::rotate(normal_face, normal_face_rotate, cv::ROTATE_90_CLOCKWISE);
+  cv::rotate(normal_face, normal_face_rotate, cv::ROTATE_90_COUNTERCLOCKWISE);
   image_1 = cv::imread(file_path_1, cv::IMREAD_COLOR);
   image_2 = cv::imread(file_path_2, cv::IMREAD_COLOR);
 }
@@ -65,7 +70,27 @@ void GetDataCallback(const std_msgs::Int16& msg){
       break;
 
       case 2:
-      GIFShow(face_path_2, &time_stack, 17, 0.15);
+      GIFShow(face_path_2, &time_stack, 24, 0.1);
+      break;
+
+      case 3:
+      GIFShow(face_path_3, &time_stack, 2, 0.4);
+      break;
+
+      case 4:
+      GIFShow(face_path_4, &time_stack, 32, 0.15);
+      break;
+
+      case 5:
+      GIFShow(face_path_5, &time_stack, 32, 0.07);
+      break;
+
+      case 6:
+      GIFShow(face_path_6, &time_stack, 24, 0.1);
+      break;
+
+      case 7:
+      GIFShow(face_path_7, &time_stack, 17, 0.15);
       break;
 
       case 10:

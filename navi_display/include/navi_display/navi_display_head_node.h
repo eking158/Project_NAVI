@@ -36,6 +36,11 @@ string gif_file_path_2;
 string normal_face_path;
 string face_path_1;
 string face_path_2;
+string face_path_3;
+string face_path_4;
+string face_path_5;
+string face_path_6;
+string face_path_7;
 
 cv::Mat normal_face;
 cv::Mat normal_face_rotate;
