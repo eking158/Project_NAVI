@@ -29,13 +29,10 @@ void initialize(){
   display_head=0;
   time_stack = 0;
   num_gif = 1;
-
   //file path setting for switching MCU
   //file_path_origin = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/";    //for rpi
   //file_path_origin = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/";      //for Notebook
-
   std::string file_path_origin = ros::package::getPath("navi_display")+"/src/";
-
   //image file path (for test)
   file_path_1 = file_path_origin+"images/test_1.jpg";
   file_path_2 = file_path_origin+"images/test_2.png";
@@ -53,9 +50,18 @@ void initialize(){
 
   //CheckImage(gif_file_path_2);
   normal_face = cv::imread(normal_face_path, cv::IMREAD_COLOR);
-  cv::rotate(normal_face, normal_face_rotate, cv::ROTATE_90_COUNTERCLOCKWISE);
   image_1 = cv::imread(file_path_1, cv::IMREAD_COLOR);
   image_2 = cv::imread(file_path_2, cv::IMREAD_COLOR);
+
+  left_eye_base.x = 200;
+  left_eye_base.y = 200;
+  right_eye_base.x = 300;
+  right_eye_base.y = 300;
+
+  left_eye_msgs.x = 0;
+  left_eye_msgs.y = 0;
+  right_eye_msgs.x = 0;
+  right_eye_msgs.y = 0;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 void GetDataCallback(const std_msgs::Int16& msg){
@@ -63,6 +69,8 @@ void GetDataCallback(const std_msgs::Int16& msg){
     time_stack++;
     switch(display_head){
       case 0:
+      cv::rotate(normal_face, normal_face_rotate, cv::ROTATE_90_COUNTERCLOCKWISE);
+      cv::ellipse(normal_face_rotate, cv::Point(left_eye_base.x+left_eye_msgs.x, left_eye_base.y+left_eye_msgs.y), cv::Size(50.0, 50.0), 90, 0, 360, cv::Scalar(255, 0, 0), 10, 8);
       cv::imshow("face", normal_face_rotate);
       cv::waitKey(10);
       break;
@@ -115,6 +123,15 @@ void GetDataCallback(const std_msgs::Int16& msg){
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
+void GetLeftEyeCallback(const geometry_msgs::Pose2D& msg){
+  left_eye_msgs.x = msg.x;
+  left_eye_msgs.y = msg.y;
+}
+//-----------------------------------------------------------------------------------------
+void GetRightEyeCallback(const geometry_msgs::Pose2D& msg){
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "navi_display_head_node");
@@ -126,6 +143,8 @@ int main(int argc, char** argv)
   cv::startWindowThread();
 
   data_sub = nh.subscribe("/navi/display",1000,GetDataCallback);
+  left_eye_sub = nh.subscribe("/navi/eye/left",1000,GetLeftEyeCallback);
+  right_eye_sub = nh.subscribe("/navi/eye/right",1000,GetRightEyeCallback);
 
   ros::spin();
   cv::destroyWindow("face");

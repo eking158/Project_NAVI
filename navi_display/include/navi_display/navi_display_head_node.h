@@ -13,6 +13,7 @@ using namespace std;
 
 //ros_communication_message type
 #include <std_msgs/Int16.h>
+#include <geometry_msgs/Pose2D.h>
 
 //define
 #define PUB_HZ 50
@@ -21,6 +22,8 @@ using namespace std;
 
 //ros communication
 ros::Subscriber data_sub;
+ros::Subscriber left_eye_sub;
+ros::Subscriber right_eye_sub;
 
 //ros msg
 
@@ -47,7 +50,11 @@ cv::Mat normal_face;
 cv::Mat normal_face_rotate;
 cv::Mat image_1;
 cv::Mat image_2;
+geometry_msgs::Pose2D left_eye_base;    //왼쪽 눈의 기본 위치
+geometry_msgs::Pose2D right_eye_base;   //오른쪽 눈의 기본 위치
 
+geometry_msgs::Pose2D left_eye_msgs;
+geometry_msgs::Pose2D right_eye_msgs;
 
 //function
 void initialize();
@@ -56,4 +63,6 @@ void GIFShow(string path, int* now_time, int frame_num, float frame_time);
 
 //callback
 void GetDataCallback(const std_msgs::Int16& msg);
+void GetLeftEyeCallback(const geometry_msgs::Pose2D& msg);
+void GetRightEyeCallback(const geometry_msgs::Pose2D& msg);
 
