@@ -1,5 +1,6 @@
 #include <navi_display/navi_display_head_node.h>
 
+///////////////////////////////////////////////////////////////////////////////////////////
 void CheckImage(const char* path){
   int ret = access(path, F_OK);
   if (ret == 0) {
@@ -9,7 +10,11 @@ void CheckImage(const char* path){
     ROS_INFO("No");
   }
 }
-
+//-----------------------------------------------------------------------------------------
+float float_map(float x, float in_min, float in_max, float out_min, float out_max){
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+///////////////////////////////////////////////////////////////////////////////////////////
 void GIFShow(string path, int* now_time, int frame_num, float frame_time){
   if(*now_time > frame_time*PUB_HZ){
         if(num_gif>=frame_num) num_gif=1;
@@ -24,7 +29,41 @@ void GIFShow(string path, int* now_time, int frame_num, float frame_time){
         *now_time=0;
       }
 }
+///////////////////////////////////////////////////////////////////////////////////////////
+void GetEyeParamYaml(){
+  std::string Eye_path = ros::package::getPath("navi_display") + "/config/eye_data.yaml"; //AB param yaml
+  YAML::Node Eye_doc = YAML::LoadFile(Eye_path);
+  left_eye_base.x           = Eye_doc["left_eye_base_x"].as<int>();
+  left_eye_base.y           = Eye_doc["left_eye_base_y"].as<int>();
+  left_eye_major_length     = Eye_doc["left_eye_major_length"].as<int>();
+  left_eye_minor_length     = Eye_doc["left_eye_minor_length"].as<int>();
+  left_eye_rotate_angle     = Eye_doc["left_eye_rotate_angle"].as<int>();
+  left_eye_r                = Eye_doc["left_eye_r"].as<int>();
+  left_eye_g                = Eye_doc["left_eye_g"].as<int>();
+  left_eye_b                = Eye_doc["left_eye_b"].as<int>();
+  left_eye_thick            = Eye_doc["left_eye_thick"].as<int>();
 
+  right_eye_base.x           = Eye_doc["right_eye_base_x"].as<int>();
+  right_eye_base.y           = Eye_doc["right_eye_base_y"].as<int>();
+  right_eye_major_length     = Eye_doc["right_eye_major_length"].as<int>();
+  right_eye_minor_length     = Eye_doc["right_eye_minor_length"].as<int>();
+  right_eye_rotate_angle     = Eye_doc["right_eye_rotate_angle"].as<int>();
+  right_eye_r                = Eye_doc["right_eye_r"].as<int>();
+  right_eye_g                = Eye_doc["right_eye_g"].as<int>();
+  right_eye_b                = Eye_doc["right_eye_b"].as<int>();
+  right_eye_thick            = Eye_doc["right_eye_thick"].as<int>();
+
+  eye_tracking_x_min            = Eye_doc["eye_tracking_x_min"].as<int>();
+  eye_tracking_x_max            = Eye_doc["eye_tracking_x_max"].as<int>();
+  eye_tracking_y_min            = Eye_doc["eye_tracking_y_min"].as<int>();
+  eye_tracking_y_max            = Eye_doc["eye_tracking_y_max"].as<int>();
+
+  eye_moving_x_min            = Eye_doc["eye_moving_x_min"].as<int>();
+  eye_moving_x_max            = Eye_doc["eye_moving_x_max"].as<int>();
+  eye_moving_y_min            = Eye_doc["eye_moving_y_min"].as<int>();
+  eye_moving_y_max            = Eye_doc["eye_moving_y_max"].as<int>();
+}
+///////////////////////////////////////////////////////////////////////////////////////////
 void initialize(){
   display_head=0;
   time_stack = 0;
@@ -34,8 +73,6 @@ void initialize(){
   //file_path_origin = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/";      //for Notebook
   std::string file_path_origin = ros::package::getPath("navi_display")+"/src/";
   //image file path (for test)
-  file_path_1 = file_path_origin+"images/test_1.jpg";
-  file_path_2 = file_path_origin+"images/test_2.png";
   gif_file_path_1 = file_path_origin+"images/gif_test_1/";
   gif_file_path_2 = file_path_origin+"images/gif_test_2/";
   //image file path (for face)
@@ -47,17 +84,11 @@ void initialize(){
   face_path_5 = file_path_origin+"images/face_5/";
   face_path_6 = file_path_origin+"images/face_6/";
   face_path_7 = file_path_origin+"images/face_7/";
+  moving_eye_face_path_1 = file_path_origin+"images/moving_eye_1.png";
 
-  //CheckImage(gif_file_path_2);
+  //CheckImage(moving_eye_face_path_1);
   normal_face = cv::imread(normal_face_path, cv::IMREAD_COLOR);
-  image_1 = cv::imread(file_path_1, cv::IMREAD_COLOR);
-  image_2 = cv::imread(file_path_2, cv::IMREAD_COLOR);
-
-  left_eye_base.x = 200;
-  left_eye_base.y = 200;
-  right_eye_base.x = 300;
-  right_eye_base.y = 300;
-
+  moving_eye_face_1 = cv::imread(moving_eye_face_path_1, cv::IMREAD_COLOR);
   left_eye_msgs.x = 0;
   left_eye_msgs.y = 0;
   right_eye_msgs.x = 0;
@@ -69,9 +100,11 @@ void GetDataCallback(const std_msgs::Int16& msg){
     time_stack++;
     switch(display_head){
       case 0:
-      cv::rotate(normal_face, normal_face_rotate, cv::ROTATE_90_COUNTERCLOCKWISE);
-      cv::ellipse(normal_face_rotate, cv::Point(left_eye_base.x+left_eye_msgs.x, left_eye_base.y+left_eye_msgs.y), cv::Size(50.0, 50.0), 90, 0, 360, cv::Scalar(255, 0, 0), 10, 8);
-      cv::imshow("face", normal_face_rotate);
+      //cv::rotate(normal_face, normal_face_rotate, cv::ROTATE_90_COUNTERCLOCKWISE);
+      cv::rotate(moving_eye_face_1, moving_eye_face_rotate_1, cv::ROTATE_90_COUNTERCLOCKWISE);
+      cv::ellipse(moving_eye_face_rotate_1, cv::Point(left_eye_base.y+left_eye_msgs.y, left_eye_base.x+left_eye_msgs.x), cv::Size(left_eye_major_length, left_eye_minor_length), left_eye_rotate_angle, 0, 360, cv::Scalar(left_eye_b, left_eye_g, left_eye_r), left_eye_thick, 8);
+      cv::ellipse(moving_eye_face_rotate_1, cv::Point(right_eye_base.y+right_eye_msgs.y, right_eye_base.x+right_eye_msgs.x), cv::Size(right_eye_major_length, right_eye_minor_length), right_eye_rotate_angle, 0, 360, cv::Scalar(right_eye_b, right_eye_g, right_eye_r), right_eye_thick, 8);
+      cv::imshow("face", moving_eye_face_rotate_1);
       cv::waitKey(10);
       break;
 
@@ -103,16 +136,6 @@ void GetDataCallback(const std_msgs::Int16& msg){
       GIFShow(face_path_7, &time_stack, 17, 0.15);
       break;
 
-      case 10:
-      cv::imshow("face", image_1);
-      cv::waitKey(10);
-      break;
-
-      case 11:
-      cv::imshow("face", image_2);
-      cv::waitKey(10);
-      break;
-
       case 12:
       GIFShow(gif_file_path_1, &time_stack, 12, 0.4);
       break;
@@ -124,12 +147,13 @@ void GetDataCallback(const std_msgs::Int16& msg){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 void GetLeftEyeCallback(const geometry_msgs::Pose2D& msg){
-  left_eye_msgs.x = msg.x;
-  left_eye_msgs.y = msg.y;
+  left_eye_msgs.x = -float_map(msg.x, eye_tracking_x_min, eye_tracking_x_max, eye_moving_x_min, eye_moving_x_max);
+  left_eye_msgs.y = -float_map(msg.y, eye_tracking_y_min, eye_tracking_y_max, eye_moving_y_min, eye_moving_y_max);
 }
 //-----------------------------------------------------------------------------------------
 void GetRightEyeCallback(const geometry_msgs::Pose2D& msg){
-
+  right_eye_msgs.x = -float_map(msg.x, eye_tracking_x_min, eye_tracking_x_max, eye_moving_x_min, eye_moving_x_max);
+  right_eye_msgs.y = -float_map(msg.y, eye_tracking_y_min, eye_tracking_y_max, eye_moving_y_min, eye_moving_y_max);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
@@ -137,6 +161,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "navi_display_head_node");
   ros::NodeHandle nh;
   initialize();
+  GetEyeParamYaml();
 
   cv::namedWindow("face", cv::WindowFlags::WINDOW_NORMAL);
   cv::setWindowProperty("face", cv::WindowPropertyFlags::WND_PROP_FULLSCREEN, cv::WindowFlags::WINDOW_FULLSCREEN);

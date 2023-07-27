@@ -13,7 +13,7 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
 # add the display control node
 add_executable(navi_display_head_node src/navi_display_head_node.cpp)
 add_dependencies(navi_display_head_node ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS})
-target_link_libraries(navi_display_head_node ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(navi_display_head_node ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} yaml-cpp)
 
 
 # Mark executables and/or libraries for installation
