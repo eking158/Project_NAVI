@@ -32,7 +32,9 @@ void initialize(){
 
   //file path setting for switching MCU
   //file_path_origin = "/home/ubuntu/catkin_ws/src/Project_NAVI/navi_display/src/";    //for rpi
-  file_path_origin = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/";      //for Notebook
+  //file_path_origin = "/home/eking/NAVI_ws/src/navi_main/navi_display/src/";      //for Notebook
+
+  std::string file_path_origin = ros::package::getPath("navi_display")+"/src/";
 
   //image file path (for test)
   file_path_1 = file_path_origin+"images/test_1.jpg";
