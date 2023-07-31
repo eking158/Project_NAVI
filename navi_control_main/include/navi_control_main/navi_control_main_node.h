@@ -24,6 +24,10 @@ Right_shoulder_pitch -> Right_shoulder_roll -> Right_shoulder_yaw -> Right_elbow
 #include <navi_control_dynamixel/SyncSetPosition.h>
 #include <std_msgs/Int16.h>
 
+//DEFINE
+#define HZ 30
+#define UNITY_HZ 50
+
 //custom header
 
 //ros communication
@@ -37,12 +41,19 @@ ros::Subscriber data_sub;
 
 
 //ros msg
-navi_control_dynamixel::SyncSetPosition dynamixel_up_msg;    //up dynamixel control msg
-navi_control_dynamixel::SyncSetPosition dynamixel_middle_msg;  //middle dynamixel control msg
-navi_control_dynamixel::SyncSetPosition dynamixel_down_msg;  //down dynamixel control msg
-geometry_msgs::Twist velocity_msg;                           //mobile robot velocity control msg
-navi_humanoid_msgs::Hands hands_msg;                         //hands fingers control msg
-std_msgs::Int16 display_msg;                                 //display face control msg
+navi_control_dynamixel::SyncSetPosition dynamixel_up_msg;          //up dynamixel control msg (unity)
+navi_control_dynamixel::SyncSetPosition dynamixel_middle_msg;      //middle dynamixel control msg (unity)
+navi_control_dynamixel::SyncSetPosition dynamixel_down_msg;        //down dynamixel control msg (unity)
+geometry_msgs::Twist velocity_msg;                                 //mobile robot velocity control msg
+navi_humanoid_msgs::Hands hands_msg;                               //hands fingers control msg
+std_msgs::Int16 display_msg;                                       //display face control msg
+
+navi_control_dynamixel::SyncSetPosition dynamixel_up_base_msg;     //up dynamixel control msg (base)
+navi_control_dynamixel::SyncSetPosition dynamixel_middle_base_msg; //middle dynamixel control msg (base)
+navi_control_dynamixel::SyncSetPosition dynamixel_down_base_msg;   //down dynamixel control msg (base)
+geometry_msgs::Twist velocity_base_msg;                            //mobile robot velocity control msg (base)
+navi_humanoid_msgs::Hands hands_base_msg;                          //hands fingers control msg (base)
+std_msgs::Int16 display_base_msg;                                  //display face control msg (base)
 
 //variables
 int base_head_yaw;
@@ -64,6 +75,11 @@ int base_right_elbow_pitch;
 int base_right_elbow_yaw;
 int base_right_wrist_pitch;
 int base_right_wrist_roll;
+
+//for callback check
+int prev_call;
+int curr_call;
+bool unity_callback_flag;
 
 //function
 void initialize();
