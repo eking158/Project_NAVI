@@ -42,3 +42,6 @@ minions_eye_moving_x_min: -50                #ui에서 실제 움직이는 eye�
 minions_eye_moving_x_max: 50                #ui에서 실제 움직이는 eye의 x 최댓값
 minions_eye_moving_y_min: -50                #ui에서 실제 움직이는 eye의 y 최솟값
 minions_eye_moving_y_max: 50                #ui에서 실제 움직이는 eye의 y 최댓값
+
+minions_eye_blink_time: 0.06                 #ui에서 눈을 감는 시간
+minions_eye_open_time: 6                    #ui에서 눈을 뜨고 있는 시간

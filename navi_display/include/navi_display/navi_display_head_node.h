@@ -17,7 +17,7 @@ using namespace std;
 #include <geometry_msgs/Pose2D.h>
 
 //define
-#define PUB_HZ 50
+#define PUB_HZ 30
 
 //custom header
 
@@ -56,6 +56,23 @@ cv::Mat moving_eye_face_rotate_1;
 cv::Mat moving_eye_face_2;
 cv::Mat moving_eye_face_rotate_2;
 
+//gif frame parameters
+int gif_frame_num_1;
+int gif_frame_num_2;
+int gif_frame_num_3;
+int gif_frame_num_4;
+int gif_frame_num_5;
+int gif_frame_num_6;
+int gif_frame_num_7;
+
+float gif_frame_time_1;
+float gif_frame_time_2;
+float gif_frame_time_3;
+float gif_frame_time_4;
+float gif_frame_time_5;
+float gif_frame_time_6;
+float gif_frame_time_7;
+
 //eye parameters (ver_1)
 geometry_msgs::Pose2D left_eye_base;    //왼쪽 눈의 기본 위치
 float left_eye_major_length;            //왼쪽 눈의 장축 길이
@@ -84,6 +101,12 @@ float eye_moving_x_min;                  //ui에서 실제 움직이는 eye의 x
 float eye_moving_x_max;                  //ui에서 실제 움직이는 eye의 x 최댓값
 float eye_moving_y_min;                  //ui에서 실제 움직이는 eye의 y 최솟값
 float eye_moving_y_max;                  //ui에서 실제 움직이는 eye의 y 최댓값
+
+float eye_blink_time;                    //ui에서 눈을 감는 시간
+float eye_open_time;                     //ui에서 눈을 뜨고 있는 시간
+
+float eye_blink_major_ratio;             //ui에서 눈 감을때의 장축 감소 비율
+float eye_blink_minor_ratio;             //ui에서 눈 감을때의 단축 감소 비율
 
 //eye parameters (ver_2 minions)
 geometry_msgs::Pose2D minions_eye_base_1;    //미니언즈 눈의 기본 위치
@@ -127,6 +150,9 @@ float minions_eye_moving_x_max;                  //ui에서 실제 움직이는 
 float minions_eye_moving_y_min;                  //ui에서 실제 움직이는 eye의 y 최솟값
 float minions_eye_moving_y_max;                  //ui에서 실제 움직이는 eye의 y 최댓값
 
+float minions_eye_blink_time;                    //ui에서 눈을 감는 시간
+float minions_eye_open_time;                     //ui에서 눈을 뜨고 있는 시간
+
 
 geometry_msgs::Pose2D left_eye_msgs;
 geometry_msgs::Pose2D right_eye_msgs;
@@ -135,6 +161,8 @@ geometry_msgs::Pose2D right_eye_msgs;
 void initialize();
 void CheckImage(const char* path);
 void GIFShow(string path, int* now_time, int frame_num, float frame_time);
+void MovingEyeMinions(string path, int* now_time, float frame_time_blink, float frame_time_rest);
+void MovingEyeNormal(string path, int* now_time, float frame_time_blink, float frame_time_rest);
 void GetEyeParamYaml();
 float float_map(float x, float in_min, float in_max, float out_min, float out_max);
 

@@ -1,22 +1,22 @@
-left_eye_base_x: 350                #왼쪽 눈의 기본 위치 (x축)
-left_eye_base_y: 310                #왼쪽 눈의 기본 위치 (y축)
-left_eye_major_length: 60           #왼쪽 눈의 장축 반지름
-left_eye_minor_length: 30           #왼쪽 눈의 단축 반지름
-left_eye_rotate_angle: 15           #왼쪽 눈의 회전 각도
+left_eye_base_x: 340                #왼쪽 눈의 기본 위치 (x축)
+left_eye_base_y: 450                #왼쪽 눈의 기본 위치 (y축)
+left_eye_major_length: 40           #왼쪽 눈의 장축 반지름
+left_eye_minor_length: 40           #왼쪽 눈의 단축 반지름
+left_eye_rotate_angle: 0           #왼쪽 눈의 회전 각도
 left_eye_r: 0                     #왼쪽 눈의 색상(R)
 left_eye_g: 0                       #왼쪽 눈의 색상(G)
-left_eye_b: 0                       #왼쪽 눈의 색상(B)
+left_eye_b: 255                       #왼쪽 눈의 색상(B)
 left_eye_thick: -1                  #왼쪽 눈의 굵기 (-1이면 내부 채움)
 
 
-right_eye_base_x: 130                #오른쪽 눈의 기본 위치 (x축)
-right_eye_base_y: 310                #오른쪽 눈의 기본 위치 (y축)
-right_eye_major_length: 60           #오른쪽 눈의 장축 반지름
-right_eye_minor_length: 30           #오른쪽 눈의 단축 반지름
-right_eye_rotate_angle: 345           #오른쪽 눈의 회전 각도
+right_eye_base_x: 140                #오른쪽 눈의 기본 위치 (x축)
+right_eye_base_y: 450                #오른쪽 눈의 기본 위치 (y축)
+right_eye_major_length: 40           #오른쪽 눈의 장축 반지름
+right_eye_minor_length: 40           #오른쪽 눈의 단축 반지름
+right_eye_rotate_angle: 0           #오른쪽 눈의 회전 각도
 right_eye_r: 0                     #오른쪽 눈의 색상(R)
 right_eye_g: 0                       #오른쪽 눈의 색상(G)
-right_eye_b: 0                       #오른쪽 눈의 색상(B)
+right_eye_b: 255                       #오른쪽 눈의 색상(B)
 right_eye_thick: -1                  #오른쪽 눈의 굵기 (-1이면 내부 채움)
 
 eye_tracking_x_min: -30                #unity에서 출력되는 eye의 x 최솟값
@@ -24,7 +24,13 @@ eye_tracking_x_max: 30                #unity에서 출력되는 eye의 x 최댓�
 eye_tracking_y_min: -30                #unity에서 출력되는 eye의 y 최솟값
 eye_tracking_y_max: 30                #unity에서 출력되는 eye의 y 최댓값
 
-eye_moving_x_min: -50                #ui에서 실제 움직이는 eye의 x 최솟값
-eye_moving_x_max: 50                #ui에서 실제 움직이는 eye의 x 최댓값
-eye_moving_y_min: -50                #ui에서 실제 움직이는 eye의 y 최솟값
-eye_moving_y_max: 50                #ui에서 실제 움직이는 eye의 y 최댓값
+eye_moving_x_min: -80                #ui에서 실제 움직이는 eye의 x 최솟값
+eye_moving_x_max: 80                #ui에서 실제 움직이는 eye의 x 최댓값
+eye_moving_y_min: -80                #ui에서 실제 움직이는 eye의 y 최솟값
+eye_moving_y_max: 80                #ui에서 실제 움직이는 eye의 y 최댓값
+
+eye_blink_time: 0.1                 #ui에서 눈을 감는 시간
+eye_open_time: 5                 #ui에서 눈을 뜨고 있는 시간
+
+eye_blink_major_ratio: 0   #ui에서 눈 감을때의 장축 감소 비율
+eye_blink_minor_ratio: 0   #ui에서 눈 감을때의 단축 감소 비율
