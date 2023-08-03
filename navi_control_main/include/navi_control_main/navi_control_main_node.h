@@ -23,6 +23,7 @@ Right_shoulder_pitch -> Right_shoulder_roll -> Right_shoulder_yaw -> Right_elbow
 #include <navi_humanoid_msgs/Hands.h>
 #include <navi_control_dynamixel/SyncSetPosition.h>
 #include <std_msgs/Int16.h>
+#include <std_msgs/Bool.h>
 
 //DEFINE
 #define HZ 30
@@ -38,6 +39,7 @@ ros::Publisher hand_pub;            //hands fingers control publisher
 ros::Publisher cmd_vel_pub;         //mobile robot velocity control publisher
 ros::Publisher display_pub;         //display face show control publisher
 ros::Subscriber data_sub;
+ros::Subscriber on_off_sub;
 
 
 //ros msg
@@ -77,8 +79,6 @@ int base_right_wrist_pitch;
 int base_right_wrist_roll;
 
 //for callback check
-int prev_call;
-int curr_call;
 bool unity_callback_flag;
 
 //function
@@ -87,4 +87,5 @@ void GetBaseYaml();
 
 //callback
 void GetDataCallback(const navi_humanoid_msgs::Humanoid& msg);
+void GetOnOffCallback(const std_msgs::Bool& msg);
 
