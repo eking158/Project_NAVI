@@ -1,0 +1,11 @@
+<launch>    
+    <node pkg="rosserial_python" type="serial_node.py" name="navi_hand">
+    <param name="port" value="/dev/navi_hand"/>
+    <param name="baud" value="57600"/>
+    </node>
+
+    <node pkg="rosserial_python" type="serial_node.py" name="navi_dc">
+    <param name="port" value="/dev/navi_dc"/>
+    <param name="baud" value="57600"/>
+    </node>
+</launch>
