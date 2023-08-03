@@ -218,7 +218,7 @@ int main(int argc, char** argv)
   while(ros::ok()){
     ros::spinOnce();
     if(unity_callback_flag){
-      ROS_INFO("Unity");
+      //ROS_INFO("Unity");
       dynamixel_up_pub.publish(dynamixel_up_msg);                      //control up dynamixel motors (unity)
       dynamixel_middle_pub.publish(dynamixel_middle_msg);             //control middle dynamixel motors (unity)
       dynamixel_down_pub.publish(dynamixel_down_msg);                 //control down dynamixel motors (unity)
@@ -227,7 +227,7 @@ int main(int argc, char** argv)
       display_pub.publish(display_msg);                   //control display for showing face
     }
     else{
-      ROS_INFO("Base");
+      //ROS_INFO("Base");
       dynamixel_up_pub.publish(dynamixel_up_base_msg);               //control up dynamixel motors (base)
       dynamixel_middle_pub.publish(dynamixel_middle_base_msg);       //control middle dynamixel motors (base)
       dynamixel_down_pub.publish(dynamixel_down_base_msg);           //control down dynamixel motors (base)
