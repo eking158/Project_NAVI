@@ -139,7 +139,7 @@ void initialize(){
   hands_base_msg.right_ring = 180;
   hands_base_msg.right_pinky = 135;
   //display setting
-  display_base_msg.data = 1;
+  display_base_msg.data = 0;
   //copy & paste base to unity
   dynamixel_up_msg = dynamixel_up_base_msg;
   dynamixel_middle_msg = dynamixel_middle_base_msg;
