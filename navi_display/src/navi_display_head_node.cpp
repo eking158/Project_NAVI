@@ -77,14 +77,22 @@ void MovingEyeNormal(string path, int* now_time, float frame_time_blink, float f
     cv::Mat gif_rotate;
     if(num_gif == 1 || num_gif == 3){
       cv::rotate(gif, gif_rotate, cv::ROTATE_90_COUNTERCLOCKWISE);
-      cv::ellipse(gif_rotate, cv::Point(left_eye_base.y+left_eye_msgs.y, left_eye_base.x+left_eye_msgs.x), cv::Size(left_eye_major_length, left_eye_minor_length), left_eye_rotate_angle, 0, 360, cv::Scalar(left_eye_b, left_eye_g, left_eye_r), left_eye_thick, 8);
-      cv::ellipse(gif_rotate, cv::Point(right_eye_base.y+left_eye_msgs.y, right_eye_base.x+left_eye_msgs.x), cv::Size(right_eye_major_length, right_eye_minor_length), right_eye_rotate_angle, 0, 360, cv::Scalar(right_eye_b, right_eye_g, right_eye_r), right_eye_thick, 8);
+      for(int i =0; i<18; i++){
+        if(i>0){
+          cv::ellipse(gif_rotate, cv::Point(left_eye_base.y+left_eye_msgs.y, left_eye_base.x+left_eye_msgs.x), cv::Size(left_eye_major_length+ (18 - i)*eye_shine_ratio, left_eye_minor_length+ (18 - i)*eye_shine_ratio), left_eye_rotate_angle, 0, 360, cv::Scalar(i*10, left_eye_g, left_eye_r), left_eye_thick, 8);
+          cv::ellipse(gif_rotate, cv::Point(right_eye_base.y+left_eye_msgs.y, right_eye_base.x+left_eye_msgs.x), cv::Size(right_eye_major_length+ (18 - i)*eye_shine_ratio, right_eye_minor_length+ (18 - i)*eye_shine_ratio), right_eye_rotate_angle, 0, 360, cv::Scalar(i*10, right_eye_g, right_eye_r), right_eye_thick, 8);
+        }
+      }
       cv::imshow("face", gif_rotate);
      }
      else if(num_gif == 2){
       cv::rotate(gif, gif_rotate, cv::ROTATE_90_COUNTERCLOCKWISE);
-      cv::ellipse(gif_rotate, cv::Point(left_eye_base.y+left_eye_msgs.y, left_eye_base.x+left_eye_msgs.x), cv::Size(left_eye_major_length*eye_blink_major_ratio, left_eye_minor_length*eye_blink_minor_ratio), left_eye_rotate_angle, 0, 360, cv::Scalar(left_eye_b, left_eye_g, left_eye_r), left_eye_thick, 8);
-      cv::ellipse(gif_rotate, cv::Point(right_eye_base.y+left_eye_msgs.y, right_eye_base.x+left_eye_msgs.x), cv::Size(right_eye_major_length*eye_blink_major_ratio, right_eye_minor_length*eye_blink_minor_ratio), right_eye_rotate_angle, 0, 360, cv::Scalar(right_eye_b, right_eye_g, right_eye_r), right_eye_thick, 8);
+      for(int i =0; i<18; i++){
+        if(i>0){
+          cv::ellipse(gif_rotate, cv::Point(left_eye_base.y+left_eye_msgs.y, left_eye_base.x+left_eye_msgs.x), cv::Size(0 ,0), left_eye_rotate_angle, 0, 360, cv::Scalar(i*10, left_eye_g, left_eye_r), left_eye_thick, 8);
+          cv::ellipse(gif_rotate, cv::Point(right_eye_base.y+left_eye_msgs.y, right_eye_base.x+left_eye_msgs.x), cv::Size(0, 0), right_eye_rotate_angle, 0, 360, cv::Scalar(i*10, right_eye_g, right_eye_r), right_eye_thick, 8);
+        }
+      }
       cv::imshow("face", gif_rotate);
      }
     cv::waitKey(10);
@@ -147,6 +155,8 @@ void GetEyeParamYaml(){
 
   eye_blink_major_ratio              = Eye_doc["eye_blink_major_ratio"].as<float>();
   eye_blink_minor_ratio               = Eye_doc["eye_blink_minor_ratio"].as<float>();
+
+  eye_shine_ratio               = Eye_doc["eye_shine_ratio"].as<float>();
   //-----------------------------------------------------------------------------------------
   std::string Eye_path_2 = ros::package::getPath("navi_display") + "/config/eye_data_minions.yaml"; //AB param yaml
   YAML::Node Eye_doc_2 = YAML::LoadFile(Eye_path_2);
@@ -197,6 +207,41 @@ void GetEyeParamYaml(){
 
   minions_eye_blink_time              = Eye_doc_2["minions_eye_blink_time"].as<float>();
   minions_eye_open_time               = Eye_doc_2["minions_eye_open_time"].as<float>();
+  //-----------------------------------------------------------------------------------------
+  std::string Eye_path_3 = ros::package::getPath("navi_display") + "/config/eye_data_thomas.yaml"; //AB param yaml
+  YAML::Node Eye_doc_3 = YAML::LoadFile(Eye_path_3);
+  thomas_left_eye_base.x           = Eye_doc_3["thomas_left_eye_base_x"].as<int>();
+  thomas_left_eye_base.y           = Eye_doc_3["thomas_left_eye_base_y"].as<int>();
+  thomas_left_eye_major_length     = Eye_doc_3["thomas_left_eye_major_length"].as<int>();
+  thomas_left_eye_minor_length     = Eye_doc_3["thomas_left_eye_minor_length"].as<int>();
+  thomas_left_eye_rotate_angle     = Eye_doc_3["thomas_left_eye_rotate_angle"].as<int>();
+  thomas_left_eye_r                = Eye_doc_3["thomas_left_eye_r"].as<int>();
+  thomas_left_eye_g                = Eye_doc_3["thomas_left_eye_g"].as<int>();
+  thomas_left_eye_b                = Eye_doc_3["thomas_left_eye_b"].as<int>();
+  thomas_left_eye_thick            = Eye_doc_3["thomas_left_eye_thick"].as<int>();
+
+  thomas_right_eye_base.x           = Eye_doc_3["thomas_right_eye_base_x"].as<int>();
+  thomas_right_eye_base.y           = Eye_doc_3["thomas_right_eye_base_y"].as<int>();
+  thomas_right_eye_major_length     = Eye_doc_3["thomas_right_eye_major_length"].as<int>();
+  thomas_right_eye_minor_length     = Eye_doc_3["thomas_right_eye_minor_length"].as<int>();
+  thomas_right_eye_rotate_angle     = Eye_doc_3["thomas_right_eye_rotate_angle"].as<int>();
+  thomas_right_eye_r                = Eye_doc_3["thomas_right_eye_r"].as<int>();
+  thomas_right_eye_g                = Eye_doc_3["thomas_right_eye_g"].as<int>();
+  thomas_right_eye_b                = Eye_doc_3["thomas_right_eye_b"].as<int>();
+  thomas_right_eye_thick            = Eye_doc_3["thomas_right_eye_thick"].as<int>();
+
+  thomas_eye_tracking_x_min         = Eye_doc_3["thomas_eye_tracking_x_min"].as<int>();
+  thomas_eye_tracking_x_max         = Eye_doc_3["thomas_eye_tracking_x_max"].as<int>();
+  thomas_eye_tracking_y_min         = Eye_doc_3["thomas_eye_tracking_y_min"].as<int>();
+  thomas_eye_tracking_y_max         = Eye_doc_3["thomas_eye_tracking_y_max"].as<int>();
+
+  thomas_eye_moving_x_min            = Eye_doc_3["thomas_eye_moving_x_min"].as<int>();
+  thomas_eye_moving_x_max            = Eye_doc_3["thomas_eye_moving_x_max"].as<int>();
+  thomas_eye_moving_y_min            = Eye_doc_3["thomas_eye_moving_y_min"].as<int>();
+  thomas_eye_moving_y_max            = Eye_doc_3["thomas_eye_moving_y_max"].as<int>();
+
+  thomas_eye_blink_time              = Eye_doc_3["thomas_eye_blink_time"].as<float>();
+  thomas_eye_open_time               = Eye_doc_3["thomas_eye_open_time"].as<float>();
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 void initialize(){
@@ -221,11 +266,13 @@ void initialize(){
   face_path_7 = file_path_origin+"images/face_7/";
   moving_eye_face_path_1 = file_path_origin+"images/moving_eye_face_1/1.png";
   moving_eye_face_path_2 = file_path_origin+"images/moving_eye_face_2/";
+  moving_eye_face_path_3 = file_path_origin+"images/moving_eye_face_3/1.png";
 
   //CheckImage(moving_eye_face_path_1);
   normal_face = cv::imread(normal_face_path, cv::IMREAD_COLOR);
   moving_eye_face_1 = cv::imread(moving_eye_face_path_1, cv::IMREAD_COLOR);
   moving_eye_face_2 = cv::imread(moving_eye_face_path_2, cv::IMREAD_COLOR);
+  moving_eye_face_3 = cv::imread(moving_eye_face_path_3, cv::IMREAD_COLOR);
   left_eye_msgs.x = 0;
   left_eye_msgs.y = 0;
   right_eye_msgs.x = 0;
@@ -267,8 +314,12 @@ void GetDataCallback(const std_msgs::Int16& msg){
       case 7:
       MovingEyeNormal(moving_eye_face_path_1, &time_stack, eye_blink_time, eye_open_time);
       //cv::rotate(moving_eye_face_1, moving_eye_face_rotate_1, cv::ROTATE_90_COUNTERCLOCKWISE);
-      //cv::ellipse(moving_eye_face_rotate_1, cv::Point(left_eye_base.y+left_eye_msgs.y, left_eye_base.x+left_eye_msgs.x), cv::Size(left_eye_major_length, left_eye_minor_length), left_eye_rotate_angle, 0, 360, cv::Scalar(left_eye_b, left_eye_g, left_eye_r), left_eye_thick, 8);
-      //cv::ellipse(moving_eye_face_rotate_1, cv::Point(right_eye_base.y+left_eye_msgs.y, right_eye_base.x+left_eye_msgs.x), cv::Size(right_eye_major_length, right_eye_minor_length), right_eye_rotate_angle, 0, 360, cv::Scalar(right_eye_b, right_eye_g, right_eye_r), right_eye_thick, 8);
+      //for(int i =0; i<18; i++){
+      //  if(i>0){
+      //    cv::ellipse(moving_eye_face_rotate_1, cv::Point(left_eye_base.y+left_eye_msgs.y, left_eye_base.x+left_eye_msgs.x), cv::Size(left_eye_major_length+ (18 - i)*eye_shine_ratio, left_eye_minor_length+ (18 - i)*eye_shine_ratio), left_eye_rotate_angle, 0, 360, cv::Scalar(i*10, left_eye_g, left_eye_r), left_eye_thick, 8);
+      //    cv::ellipse(moving_eye_face_rotate_1, cv::Point(right_eye_base.y+left_eye_msgs.y, right_eye_base.x+left_eye_msgs.x), cv::Size(right_eye_major_length+ (18 - i)*eye_shine_ratio, right_eye_minor_length+ (18 - i)*eye_shine_ratio), right_eye_rotate_angle, 0, 360, cv::Scalar(i*10, right_eye_g, right_eye_r), right_eye_thick, 8);
+      //  }
+      //}
       //cv::imshow("face", moving_eye_face_rotate_1);
       //cv::waitKey(10);
       break;
@@ -283,6 +334,14 @@ void GetDataCallback(const std_msgs::Int16& msg){
       //cv::imshow("face", moving_eye_face_rotate_2);
       //cv::waitKey(10);
       break;
+
+      case 9:
+      cv::rotate(moving_eye_face_3, moving_eye_face_rotate_3, cv::ROTATE_90_COUNTERCLOCKWISE);
+      cv::ellipse(moving_eye_face_rotate_3, cv::Point(thomas_left_eye_base.y+left_eye_msgs.y, thomas_left_eye_base.x+left_eye_msgs.x), cv::Size(thomas_left_eye_major_length, thomas_left_eye_minor_length), thomas_left_eye_rotate_angle, 0, 360, cv::Scalar(thomas_left_eye_b, thomas_left_eye_g, thomas_left_eye_r), thomas_left_eye_thick, 8);
+      cv::ellipse(moving_eye_face_rotate_3, cv::Point(thomas_right_eye_base.y+left_eye_msgs.y, thomas_right_eye_base.x+left_eye_msgs.x), cv::Size(thomas_right_eye_major_length, thomas_right_eye_minor_length), thomas_right_eye_rotate_angle, 0, 360, cv::Scalar(thomas_right_eye_b, thomas_right_eye_g, thomas_right_eye_r), thomas_right_eye_thick, 8);
+      cv::imshow("face", moving_eye_face_rotate_3);
+      cv::waitKey(10);
+      break;
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -296,6 +355,10 @@ void GetLeftEyeCallback(const geometry_msgs::Pose2D& msg){
     left_eye_msgs.x = -float_map(msg.x, eye_tracking_x_min, eye_tracking_x_max, minions_eye_moving_x_min, minions_eye_moving_x_max);
     left_eye_msgs.y = -float_map(msg.y, eye_tracking_y_min, eye_tracking_y_max, minions_eye_moving_y_min, minions_eye_moving_y_max);
     break;
+    case 9:
+    left_eye_msgs.x = -float_map(msg.x, eye_tracking_x_min, eye_tracking_x_max, thomas_eye_moving_x_min, thomas_eye_moving_x_max);
+    left_eye_msgs.y = -float_map(msg.y, eye_tracking_y_min, eye_tracking_y_max, thomas_eye_moving_y_min, thomas_eye_moving_y_max);
+    break;
   }
 }
 //-----------------------------------------------------------------------------------------
@@ -308,6 +371,10 @@ void GetRightEyeCallback(const geometry_msgs::Pose2D& msg){
     case 8:
     right_eye_msgs.x = -float_map(msg.x, eye_tracking_x_min, eye_tracking_x_max, minions_eye_moving_x_min, minions_eye_moving_x_max);
     right_eye_msgs.y = -float_map(msg.y, eye_tracking_y_min, eye_tracking_y_max, minions_eye_moving_y_min, minions_eye_moving_y_max);
+    break;
+    case 9:
+    right_eye_msgs.x = -float_map(msg.x, eye_tracking_x_min, eye_tracking_x_max, thomas_eye_moving_x_min, thomas_eye_moving_x_max);
+    right_eye_msgs.y = -float_map(msg.y, eye_tracking_y_min, eye_tracking_y_max, thomas_eye_moving_y_min, thomas_eye_moving_y_max);
     break;
   }
 }

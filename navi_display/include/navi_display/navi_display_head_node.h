@@ -48,13 +48,16 @@ string face_path_6;
 string face_path_7;
 string moving_eye_face_path_1;
 string moving_eye_face_path_2;
+string moving_eye_face_path_3;
 
 cv::Mat normal_face;
 cv::Mat normal_face_rotate;
 cv::Mat moving_eye_face_1;
-cv::Mat moving_eye_face_rotate_1;
 cv::Mat moving_eye_face_2;
+cv::Mat moving_eye_face_3;
+cv::Mat moving_eye_face_rotate_1;
 cv::Mat moving_eye_face_rotate_2;
+cv::Mat moving_eye_face_rotate_3;
 
 //gif frame parameters
 int gif_frame_num_1;
@@ -145,14 +148,47 @@ float minions_eye_g_4;                       //미니언즈 눈의 색상(G)
 float minions_eye_b_4;                       //미니언즈 눈의 색상(B)
 float minions_eye_thick_4;                   //미니언즈 눈의 굵기 (-1이면 내부 채움)
 
-float minions_eye_moving_x_min;                  //ui에서 실제 움직이는 eye의 x 최솟값
-float minions_eye_moving_x_max;                  //ui에서 실제 움직이는 eye의 x 최댓값
-float minions_eye_moving_y_min;                  //ui에서 실제 움직이는 eye의 y 최솟값
-float minions_eye_moving_y_max;                  //ui에서 실제 움직이는 eye의 y 최댓값
+float minions_eye_moving_x_min;              //ui에서 실제 움직이는 eye의 x 최솟값
+float minions_eye_moving_x_max;              //ui에서 실제 움직이는 eye의 x 최댓값
+float minions_eye_moving_y_min;              //ui에서 실제 움직이는 eye의 y 최솟값
+float minions_eye_moving_y_max;              //ui에서 실제 움직이는 eye의 y 최댓값
 
-float minions_eye_blink_time;                    //ui에서 눈을 감는 시간
-float minions_eye_open_time;                     //ui에서 눈을 뜨고 있는 시간
+float minions_eye_blink_time;                //ui에서 눈을 감는 시간
+float minions_eye_open_time;                 //ui에서 눈을 뜨고 있는 시간
 
+float eye_shine_ratio;                       //ui에서 눈 주변 빛 번짐의 정도
+
+//eye parameters (ver_3 thomas)
+geometry_msgs::Pose2D thomas_left_eye_base;    //왼쪽 눈의 기본 위치
+float thomas_left_eye_major_length;            //왼쪽 눈의 장축 길이
+float thomas_left_eye_minor_length;            //왼쪽 눈의 단축 길이
+float thomas_left_eye_rotate_angle;            //왼쪽 눈의 회전 각도
+float thomas_left_eye_r;                       //왼쪽 눈의 색상(R)
+float thomas_left_eye_g;                       //왼쪽 눈의 색상(G)
+float thomas_left_eye_b;                       //왼쪽 눈의 색상(B)
+float thomas_left_eye_thick;                   //왼쪽 눈의 굵기 (-1이면 내부 채움)
+
+geometry_msgs::Pose2D thomas_right_eye_base;    //오른쪽 눈의 기본 위치
+float thomas_right_eye_major_length;            //오른쪽 눈의 장축 길이
+float thomas_right_eye_minor_length;            //오른쪽 눈의 단축 길이
+float thomas_right_eye_rotate_angle;            //오른쪽 눈의 회전 각도
+float thomas_right_eye_r;                       //오른쪽 눈의 색상(R)
+float thomas_right_eye_g;                       //오른쪽 눈의 색상(G)
+float thomas_right_eye_b;                       //오른쪽 눈의 색상(B)
+float thomas_right_eye_thick;                   //오른쪽 눈의 굵기 (-1이면 내부 채움)
+
+float thomas_eye_tracking_x_min;                  //unity에서 출력되는 eye의 x 최솟값
+float thomas_eye_tracking_x_max;                  //unity에서 출력되는 eye의 x 최댓값
+float thomas_eye_tracking_y_min;                  //unity에서 출력되는 eye의 y 최솟값
+float thomas_eye_tracking_y_max;                  //unity에서 출력되는 eye의 y 최댓값
+
+float thomas_eye_moving_x_min;                  //ui에서 실제 움직이는 eye의 x 최솟값
+float thomas_eye_moving_x_max;                  //ui에서 실제 움직이는 eye의 x 최댓값
+float thomas_eye_moving_y_min;                  //ui에서 실제 움직이는 eye의 y 최솟값
+float thomas_eye_moving_y_max;                  //ui에서 실제 움직이는 eye의 y 최댓값
+
+float thomas_eye_blink_time;                    //ui에서 눈을 감는 시간
+float thomas_eye_open_time;                     //ui에서 눈을 뜨고 있는 시간
 
 geometry_msgs::Pose2D left_eye_msgs;
 geometry_msgs::Pose2D right_eye_msgs;
