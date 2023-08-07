@@ -1,0 +1,9 @@
+<launch>    
+	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+		<arg name="port" value="9090" />
+	</include>
+
+	<node name="file_server" pkg="file_server" type="file_server" output="screen" />
+    <node pkg="navi_control_main" type="navi_control_main_node" name="navi_control_main_node" output="screen" /> 
+    <node pkg="navi_video_streaming" type="navi_video_streaming_node" name="navi_video_streaming_node" output="screen" args="0"/> 
+</launch>
