@@ -39,8 +39,6 @@ ros::Publisher hand_pub;            //hands fingers control publisher
 ros::Publisher cmd_vel_pub;         //mobile robot velocity control publisher
 ros::Publisher display_pub;         //display face show control publisher
 ros::Subscriber data_sub;
-ros::Subscriber on_off_sub;
-
 
 //ros msg
 navi_control_dynamixel::SyncSetPosition dynamixel_up_msg;          //up dynamixel control msg (unity)
@@ -49,13 +47,6 @@ navi_control_dynamixel::SyncSetPosition dynamixel_down_msg;        //down dynami
 geometry_msgs::Twist velocity_msg;                                 //mobile robot velocity control msg
 navi_humanoid_msgs::Hands hands_msg;                               //hands fingers control msg
 std_msgs::Int16 display_msg;                                       //display face control msg
-
-navi_control_dynamixel::SyncSetPosition dynamixel_up_base_msg;     //up dynamixel control msg (base)
-navi_control_dynamixel::SyncSetPosition dynamixel_middle_base_msg; //middle dynamixel control msg (base)
-navi_control_dynamixel::SyncSetPosition dynamixel_down_base_msg;   //down dynamixel control msg (base)
-geometry_msgs::Twist velocity_base_msg;                            //mobile robot velocity control msg (base)
-navi_humanoid_msgs::Hands hands_base_msg;                          //hands fingers control msg (base)
-std_msgs::Int16 display_base_msg;                                  //display face control msg (base)
 
 //variables
 int base_head_yaw;
@@ -87,5 +78,4 @@ void GetBaseYaml();
 
 //callback
 void GetDataCallback(const navi_humanoid_msgs::Humanoid& msg);
-void GetOnOffCallback(const std_msgs::Bool& msg);
 

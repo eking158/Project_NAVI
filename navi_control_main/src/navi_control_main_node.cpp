@@ -84,71 +84,62 @@ void GetBaseYaml(){
 
 void initialize(){
   //up dynamixel id setting
-  dynamixel_up_base_msg.id1=5;
-  dynamixel_up_base_msg.id2=7;
-  dynamixel_up_base_msg.id3=11;
-  dynamixel_up_base_msg.id4=4;
-  dynamixel_up_base_msg.id5=6;
-  dynamixel_up_base_msg.id6=10;
+  dynamixel_up_msg.id1=5;
+  dynamixel_up_msg.id2=7;
+  dynamixel_up_msg.id3=11;
+  dynamixel_up_msg.id4=4;
+  dynamixel_up_msg.id5=6;
+  dynamixel_up_msg.id6=10;
   //middle dynamixel id setting
-  dynamixel_middle_base_msg.id1=9;
-  dynamixel_middle_base_msg.id2=15;
-  dynamixel_middle_base_msg.id3=8;
-  dynamixel_middle_base_msg.id4=14;
+  dynamixel_middle_msg.id1=9;
+  dynamixel_middle_msg.id2=15;
+  dynamixel_middle_msg.id3=8;
+  dynamixel_middle_msg.id4=14;
   //down dynamixel id setting
-  dynamixel_down_base_msg.id1=1;
-  dynamixel_down_base_msg.id2=2;
-  dynamixel_down_base_msg.id3=3;
-  dynamixel_down_base_msg.id4=13;
-  dynamixel_down_base_msg.id5=17;
-  dynamixel_down_base_msg.id6=12;
-  dynamixel_down_base_msg.id7=16;
+  dynamixel_down_msg.id1=1;
+  dynamixel_down_msg.id2=2;
+  dynamixel_down_msg.id3=3;
+  dynamixel_down_msg.id4=13;
+  dynamixel_down_msg.id5=17;
+  dynamixel_down_msg.id6=12;
+  dynamixel_down_msg.id7=16;
   //up dynamixel init position setting
-  dynamixel_up_base_msg.position1=base_left_shoulder_pitch;  //id 5
-  dynamixel_up_base_msg.position2=base_left_shoulder_roll;  //id 7
-  dynamixel_up_base_msg.position3=base_left_elbow_pitch;  //id 11  (2000)
-  dynamixel_up_base_msg.position4=base_right_shoulder_pitch;  //id 4
-  dynamixel_up_base_msg.position5=base_right_shoulder_roll;  //id 6
-  dynamixel_up_base_msg.position6=base_right_elbow_pitch;  //id 10  (2000)
+  dynamixel_up_msg.position1=base_left_shoulder_pitch;  //id 5
+  dynamixel_up_msg.position2=base_left_shoulder_roll;  //id 7
+  dynamixel_up_msg.position3=base_left_elbow_pitch;  //id 11  (2000)
+  dynamixel_up_msg.position4=base_right_shoulder_pitch;  //id 4
+  dynamixel_up_msg.position5=base_right_shoulder_roll;  //id 6
+  dynamixel_up_msg.position6=base_right_elbow_pitch;  //id 10  (2000)
   //middle dynamixel init position setting
-  dynamixel_middle_base_msg.position1=base_left_shoulder_yaw;  //id 9
-  dynamixel_middle_base_msg.position2=base_left_wrist_pitch;  //id 15
-  dynamixel_middle_base_msg.position3=base_right_shoulder_yaw;  //id 8
-  dynamixel_middle_base_msg.position4=base_right_wrist_pitch;  //id 14
+  dynamixel_middle_msg.position1=base_left_shoulder_yaw;  //id 9
+  dynamixel_middle_msg.position2=base_left_wrist_pitch;  //id 15
+  dynamixel_middle_msg.position3=base_right_shoulder_yaw;  //id 8
+  dynamixel_middle_msg.position4=base_right_wrist_pitch;  //id 14
   //down dynamixel init position setting
-  dynamixel_down_base_msg.position1=base_head_yaw;  //id 1
-  dynamixel_down_base_msg.position2=base_head_pitch;  //id 2
-  dynamixel_down_base_msg.position3=base_head_roll;  //id 3
-  dynamixel_down_base_msg.position4=base_left_elbow_yaw;  //id 13
-  dynamixel_down_base_msg.position5=base_left_wrist_roll;  //id 17
-  dynamixel_down_base_msg.position6=base_right_elbow_yaw;  //id 12
-  dynamixel_down_base_msg.position7=base_right_wrist_roll;  //id 16
+  dynamixel_down_msg.position1=base_head_yaw;  //id 1
+  dynamixel_down_msg.position2=base_head_pitch;  //id 2
+  dynamixel_down_msg.position3=base_head_roll;  //id 3
+  dynamixel_down_msg.position4=base_left_elbow_yaw;  //id 13
+  dynamixel_down_msg.position5=base_left_wrist_roll;  //id 17
+  dynamixel_down_msg.position6=base_right_elbow_yaw;  //id 12
+  dynamixel_down_msg.position7=base_right_wrist_roll;  //id 16
   //init velocity setting
-  velocity_base_msg.linear.x=0;
-  velocity_base_msg.linear.y=0;
-  velocity_base_msg.angular.z=0;
+  velocity_msg.linear.x=0;
+  velocity_msg.linear.y=0;
+  velocity_msg.angular.z=0;
   //init fingers setting
-  hands_base_msg.left_thumb = 0;
-  hands_base_msg.left_index = 90;
-  hands_base_msg.left_middle = 105;
-  hands_base_msg.left_ring = 55;
-  hands_base_msg.left_pinky = 90;
-  hands_base_msg.right_thumb = 0;
-  hands_base_msg.right_index = 0;
-  hands_base_msg.right_middle = 0;
-  hands_base_msg.right_ring = 180;
-  hands_base_msg.right_pinky = 135;
+  hands_msg.left_thumb = 0;
+  hands_msg.left_index = 90;
+  hands_msg.left_middle = 105;
+  hands_msg.left_ring = 55;
+  hands_msg.left_pinky = 90;
+  hands_msg.right_thumb = 0;
+  hands_msg.right_index = 0;
+  hands_msg.right_middle = 0;
+  hands_msg.right_ring = 180;
+  hands_msg.right_pinky = 135;
   //display setting
-  display_base_msg.data = 0;
-  //copy & paste base to unity
-  dynamixel_up_msg = dynamixel_up_base_msg;
-  dynamixel_middle_msg = dynamixel_middle_base_msg;
-  dynamixel_down_msg = dynamixel_down_base_msg;
-  velocity_msg = velocity_base_msg;
-  hands_msg = hands_base_msg;
-  display_msg = display_base_msg;
-  //for callback check
-  unity_callback_flag = 0;
+  display_msg.data = 0;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void GetDataCallback(const navi_humanoid_msgs::Humanoid& msg){
@@ -190,10 +181,6 @@ void GetDataCallback(const navi_humanoid_msgs::Humanoid& msg){
     //display setting
     display_msg.data = msg.etc[0];
 }
-//----------------------------------------------------------------------------------------------------------
-void GetOnOffCallback(const std_msgs::Bool& msg){
-  unity_callback_flag = msg.data;
-}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
@@ -211,30 +198,17 @@ int main(int argc, char** argv)
   display_pub = nh.advertise<std_msgs::Int16>("/navi/display",1);
   
   data_sub = nh.subscribe("/navi/unity",1000,GetDataCallback);
-  on_off_sub = nh.subscribe("/navi/on_off",1000,GetOnOffCallback);
 
   ros::Rate loopRate(HZ);
   
   while(ros::ok()){
     ros::spinOnce();
-    if(unity_callback_flag){
-      //ROS_INFO("Unity");
-      dynamixel_up_pub.publish(dynamixel_up_msg);                      //control up dynamixel motors (unity)
-      dynamixel_middle_pub.publish(dynamixel_middle_msg);             //control middle dynamixel motors (unity)
-      dynamixel_down_pub.publish(dynamixel_down_msg);                 //control down dynamixel motors (unity)
-      cmd_vel_pub.publish(velocity_msg);                //control dc motors with arduino
-      hand_pub.publish(hands_msg);                   //control micro_servos with arduino
-      display_pub.publish(display_msg);                   //control display for showing face
-    }
-    else{
-      //ROS_INFO("Base");
-      dynamixel_up_pub.publish(dynamixel_up_base_msg);               //control up dynamixel motors (base)
-      dynamixel_middle_pub.publish(dynamixel_middle_base_msg);       //control middle dynamixel motors (base)
-      dynamixel_down_pub.publish(dynamixel_down_base_msg);           //control down dynamixel motors (base)
-      cmd_vel_pub.publish(velocity_base_msg);                //control dc motors with arduino
-      hand_pub.publish(hands_base_msg);                   //control micro_servos with arduino
-      display_pub.publish(display_base_msg);                   //control display for showing face
-    }
+    dynamixel_up_pub.publish(dynamixel_up_msg);                      //control up dynamixel motors (unity)
+    dynamixel_middle_pub.publish(dynamixel_middle_msg);             //control middle dynamixel motors (unity)
+    dynamixel_down_pub.publish(dynamixel_down_msg);                 //control down dynamixel motors (unity)
+    cmd_vel_pub.publish(velocity_msg);                //control dc motors with arduino
+    hand_pub.publish(hands_msg);                   //control micro_servos with arduino
+    display_pub.publish(display_msg);                   //control display for showing face
     loopRate.sleep();
   }
   return 0;
