@@ -165,9 +165,14 @@ void GetDataCallback(const navi_humanoid_msgs::Humanoid& msg){
     dynamixel_middle_msg.position3 = msg.servo_right[2]; //8
     dynamixel_middle_msg.position4 = msg.servo_right[5]; //4
     //down dynamixel position setting
-    dynamixel_down_msg.position1 = msg.servo_head[0];  //1
-    dynamixel_down_msg.position2 = msg.servo_head[1];  //2
-    dynamixel_down_msg.position3 = msg.servo_head[2];  //3
+    //dynamixel_down_msg.position1 = msg.servo_head[0];  //1
+    //dynamixel_down_msg.position2 = msg.servo_head[1];  //2
+    //dynamixel_down_msg.position3 = msg.servo_head[2];  //3
+
+    dynamixel_down_msg.position1=base_head_yaw;  //id 1
+    dynamixel_down_msg.position2=base_head_pitch;  //id 2
+    dynamixel_down_msg.position3=base_head_roll;  //id 3
+
     dynamixel_down_msg.position4 = msg.servo_left[4];  //13
     dynamixel_down_msg.position5 = msg.servo_left[6];  //17
     dynamixel_down_msg.position6 = msg.servo_right[4]; //12
